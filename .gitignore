@@ -1,0 +1,10 @@
+*.class
+target/*
+.settings/*
+.classpath
+nb-configuration.xml
+# Package Files #
+*.jar
+*.war
+*.ear
+.project
