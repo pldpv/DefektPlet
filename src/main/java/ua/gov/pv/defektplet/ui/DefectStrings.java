@@ -6,26 +6,30 @@
 
 package ua.gov.pv.defektplet.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import org.apache.commons.io.FilenameUtils;
-import org.hibernate.Session;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import ua.gov.pv.defektplet.importExport.DefektPletDAO;
 import ua.gov.pv.defektplet.importExport.Import;
-import ua.gov.pv.defektplet.importExport.ImportRailsString;
-import ua.gov.pv.defektplet.importExport.ImportTemporary;
-import ua.gov.pv.defektplet.util.HibernateUtil;
 
 /**
  *
  * @author ПГМ
  */
 public class DefectStrings extends javax.swing.JFrame {
+
     private String fileNameWithOutExt;
+
     /**
      * Creates new form DefectStrings
      */
     public DefectStrings() {
         initComponents();
+        BasicConfigurator.configure();
+
     }
 
     /**
@@ -69,38 +73,28 @@ public class DefectStrings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    chooseDirectory = new JFileChooser();
-    chooseDirectory.setDialogTitle("Выберите папку с файлами");
-  //  chooseDirectory.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-    chooseDirectory.setAcceptAllFileFilterUsed(false);
+        try {
+            chooseDirectory = new JFileChooser();
+            chooseDirectory.setDialogTitle("Выберите папку с файлами");
+            //  chooseDirectory.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooseDirectory.setAcceptAllFileFilterUsed(false);
+            
+            if (chooseDirectory.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                System.out.println("getCurrentDirectory(): " + chooseDirectory.getCurrentDirectory());
+                System.out.println("getSelectedFile() : " + chooseDirectory.getSelectedFile());
+                fileNameWithOutExt = FilenameUtils.removeExtension(chooseDirectory.getSelectedFile().getName()).toLowerCase();
+            } 
+            Import i = new Import(chooseDirectory.getSelectedFile());
+            i.importDB(new DefektPletDAO());
+        } catch (InvalidFormatException ex) {
+            Logger.getLogger(DefectStrings.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    if (chooseDirectory.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-      System.out.println("getCurrentDirectory(): " + chooseDirectory.getCurrentDirectory());
-      System.out.println("getSelectedFile() : " + chooseDirectory.getSelectedFile());
-      fileNameWithOutExt = FilenameUtils.removeExtension(chooseDirectory.getSelectedFile().getName()).toLowerCase();
-    } else {
-      
-    }
-   
-    
-    switch (fileNameWithOutExt){
-        case "ведомость плетей":
-            importDB(new ImportRailsString());
-            break;
-        case "Ведомость ТВ":
-            importDB(new ImportTemporary());
-            break;
-    }
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void importDB(Import i){
-        i.importDB(chooseDirectory.getSelectedFile());
-    }
+
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -124,7 +118,7 @@ public class DefectStrings extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DefectStrings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-    
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

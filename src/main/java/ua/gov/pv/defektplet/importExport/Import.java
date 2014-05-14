@@ -6,83 +6,64 @@
 package ua.gov.pv.defektplet.importExport;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import ua.gov.pv.defektplet.util.HibernateUtil;
 
 /**
  *
  * @author Tkachuk Evgen
  */
-public abstract class Import {
+public class Import {
 
-    protected POIFSFileSystem fs;
-    protected HSSFWorkbook wb;
-    protected HSSFSheet sheet;
-    protected HSSFRow row;
-    protected HSSFCell cell;
-    
-    
-    /**
-     * Imports information from Excel file into DB
-     * @param file Excel file which must be import
-     */
-    public void importDB(File file) {
-        try {
-            fs = new POIFSFileSystem(new FileInputStream(file));
-            wb = new HSSFWorkbook(fs);
-        } catch (IOException ex) {
-            System.err.println(ex);
-            //Logger logger = Logger.getLogger(TemporaryRecovery.class);
-        }
+    private final File file;
+
+    public Import(File file) {
+        this.file = file;
     }
-    /**
-     * Deletes all information from DataBase table 
-     * @param clazz Entity class mapped to the DataBase table
-     */
-    protected void deleteAll(Class clazz) {
-        Session session;
-        Transaction tx;
-        List list = new LinkedList();
-        session = HibernateUtil.getSessionFactory().openSession();
-        tx = session.beginTransaction();
-        list = session.createCriteria(clazz).list();
-        for (Object obj : list) {
-            session.delete(obj);
+
+    public void importDB(DefektPletDAO dao) throws InvalidFormatException {
+        Session session = null;
+        Transaction tx = null;
+        List importList = getListForImport();
+        if (importList != null) {
+            try {
+                session = dao.getSession();
+                tx = session.beginTransaction();
+                dao.deleteAll(importList.get(0).getClass());
+                dao.saveList(importList);
+                tx.commit();
+            } catch (HibernateException ex) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+            } finally {
+                if (session != null && session.isOpen()) {
+                    session.close();
+                }
+            }
         }
-        tx.commit();
-        session.close();
+
     }
-    
-    
-    /**
-     * Converts Excel Cell into Date Type depends of input Type
-     * @param cell the cell to be converting into Date
-     * @return the Date  
-     */
-    protected Date convertDate(HSSFCell cell) {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            date = (cell.getCellType() == CELL_TYPE_STRING) ? formatter.parse(cell.toString()) : cell.getDateCellValue();
-        } catch (ParseException ex) {
-            Logger.getLogger(ImportTemporary.class.getName()).log(Level.SEVERE, null, ex);
+
+    private List getListForImport() throws InvalidFormatException {
+        List list = null;
+        RowList rowList = new RowList(new WorkbookOpen(file).getWorkbook());
+        switch (FilenameUtils.removeExtension(file.getName()).toLowerCase()) {
+            case "відомість п":
+                list = new RailsStringsList(rowList);
+                break;
+            case "відомість тв":
+                list = new TemporaryRecoveryList(rowList);
+                break;
+            case "відомість д":
+                list = new RailsDefectList(rowList);
+                break;
         }
-        return date;
+        return list;
     }
+
 }
