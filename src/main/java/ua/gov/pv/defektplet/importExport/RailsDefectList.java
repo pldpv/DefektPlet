@@ -26,6 +26,7 @@ public class RailsDefectList extends ArrayList {
     private void createRailsDefectList() {
 
         for (Row row : list) {
+                try{
                 RailsDefect rd = new RailsDefect();
                 rd.setRailway(row.getCell(1).toString());
                 rd.setFirm((int) row.getCell(2).getNumericCellValue());
@@ -52,6 +53,10 @@ public class RailsDefectList extends ArrayList {
                 rd.setNecessaryVelocityLimit((int) row.getCell(20).getNumericCellValue());
                 rd.setWaitVelocityLimit((int) row.getCell(20).getNumericCellValue());
                 add(rd);
+                }catch(IllegalStateException ex) {
+              //  LOG.error("Помилка при імпортуванні Відомостей плітей: Лист: " + row.getSheet().getSheetName() + " Рядок:" + (row.getRowNum() + 1) + " Комірка;");
+            }
+                
         }
     }
 }

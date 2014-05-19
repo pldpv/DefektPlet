@@ -98,4 +98,6 @@
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
 ] 
  2014-05-15 14:42:39,937 [RailsStringsList.java] [47        ] [Помилка при імпортуванні Відомостей плітей: Лист: ПЧ Рядок:426 Комірка;] 
+ 2014-05-18 22:14:35,098 [RailsStringsList.java] [47        ] [Помилка при імпортуванні Відомостей плітей: Лист: ПЧ Рядок:427 Комірка;] 
+ 2014-05-18 22:58:25,407 [TemporaryRecoveryList.java] [53        ] [java.lang.IllegalStateException: Cannot get a numeric value from a text cell] 
  
