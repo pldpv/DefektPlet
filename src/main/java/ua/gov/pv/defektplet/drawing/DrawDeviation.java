@@ -36,6 +36,8 @@ public class DrawDeviation implements Drawable {
     }
 
     public void draw() {
+        g2.setColor(Color.WHITE);
+        g2.fillRect(0, 0, 1000, lineHeight);
         g2.setColor(getColor());
         g2.fillRect(getX(), 0, penWidth, lineHeight);
     }

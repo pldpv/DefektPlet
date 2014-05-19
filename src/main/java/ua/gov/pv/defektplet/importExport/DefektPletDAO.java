@@ -23,6 +23,8 @@ public class DefektPletDAO extends BaseDAO {
                 }
             } catch (HibernateException ex) {
                 getSession().getTransaction().rollback();
+            }finally{
+               getSession().close();
             }
         }
     }
@@ -36,6 +38,8 @@ public class DefektPletDAO extends BaseDAO {
             }
         } catch (HibernateException ex) {
             getSession().getTransaction().rollback();
+        }finally{
+            getSession().close();
         }
     }
 }

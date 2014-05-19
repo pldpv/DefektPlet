@@ -7,6 +7,8 @@ package ua.gov.pv.defektplet.drawing;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,17 +17,22 @@ import java.util.ArrayList;
 public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
 
     private boolean drawable;
-    private static BufferedImage bImage;
+    private BufferedImage bImage;
+
     public DrawableList(BufferedImage bImage) {
         this.drawable = true;
-        this.bImage=bImage;
+        this.bImage = bImage;
     }
-    
+
+    public DrawableList() {
+        this.drawable = true;
+    }
+
     public void setDrawable(boolean drawable) {
         this.drawable = drawable;
     }
 
-    public boolean getDrawable() {
+    public boolean isDrawable() {
         return drawable;
     }
 
@@ -34,7 +41,12 @@ public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
             d.draw();
         }
     }
-    public BufferedImage getBufferedImage(){
+
+    public BufferedImage getbImage() {
         return bImage;
+    }
+
+    public void setbImage(BufferedImage bImage) {
+        this.bImage = bImage;
     }
 }

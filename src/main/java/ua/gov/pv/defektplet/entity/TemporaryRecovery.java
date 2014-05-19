@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.Formula;
 
 /**
  *
@@ -44,6 +45,8 @@ public class TemporaryRecovery implements Serializable {
     private Integer governedVelocity;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateOfChange;
+     @Formula("km*1000+m")
+    private Integer coordinate;
 
     public int getId() {
         return id;
@@ -195,5 +198,13 @@ public class TemporaryRecovery implements Serializable {
 
     public void setDateOfChange(Date dateOfChange) {
         this.dateOfChange = dateOfChange;
+    }
+
+    public Integer getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Integer coordinate) {
+        this.coordinate = coordinate;
     }
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.gov.pv.defektplet.entity;
 
 import java.io.Serializable;
@@ -11,14 +10,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import org.hibernate.annotations.Formula;
 
 /**
  *
  * @author Tkacuk Evgen
- * 
+ *
  */
 @Entity
 public class RailsStrings implements Serializable {
+
     @Id
     @GeneratedValue
     private int id;
@@ -36,6 +37,10 @@ public class RailsStrings implements Serializable {
     private Integer kmE;
     private Double mE;
     private Float stringLength;
+    @Formula("kmS*1000+mS")
+    private Integer startCoordinate;
+    @Formula("kmE*1000+mE")
+    private Integer endCoordinate;
 
     public int getId() {
         return id;
@@ -149,5 +154,20 @@ public class RailsStrings implements Serializable {
         this.stringLength = stringLength;
     }
 
+    public Integer getStartCoordinate() {
+        return startCoordinate;
+    }
+
+    public void setStartCoordinate(Integer startCoordinate) {
+        this.startCoordinate = startCoordinate;
+    }
+
+    public Integer getEndCoordinate() {
+        return endCoordinate;
+    }
+
+    public void setEndCoordinate(Integer endCoordinate) {
+        this.endCoordinate = endCoordinate;
+    }
 
 }

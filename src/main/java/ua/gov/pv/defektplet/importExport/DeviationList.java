@@ -3,32 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ua.gov.pv.defektplet.importExport;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Row;
+import ua.gov.pv.defektplet.entity.Deviation;
 import ua.gov.pv.defektplet.entity.RailsDefect;
 
 /**
  *
  * @author ПГМ
  */
-public class RailsDefectList extends ArrayList {
-
+public class DeviationList extends ArrayList{
     private final List<Row> list;
 
-    public RailsDefectList(List<Row> list) {
+    public DeviationList(List<Row> list) {
         this.list = list;
-        createRailsDefectList();
+        createDeviationList();
     }
 
-    private void createRailsDefectList() {
+    private void createDeviationList() {
 
         for (Row row : list) {
                 try{
-                RailsDefect rd = new RailsDefect();
-                rd.setRailway(row.getCell(1).toString());
+                Deviation dev = new Deviation();
+                dev.setRailway(row.getCell(1).toString());
                 rd.setFirm((int) row.getCell(2).getNumericCellValue());
                 rd.setDirection(row.getCell(3).toString());
                 rd.setRunningLine(row.getCell(4).toString());
@@ -50,8 +50,8 @@ public class RailsDefectList extends ArrayList {
                 rd.setDefectLength((float) row.getCell(20).getNumericCellValue());
                 rd.setDefectHeight((float) row.getCell(21).getNumericCellValue());
                 rd.setDefectWidth((float) row.getCell(22).getNumericCellValue());
-                rd.setNecessaryVelocityLimit((int) row.getCell(23).getNumericCellValue());
-                rd.setWaitVelocityLimit((int) row.getCell(24).getNumericCellValue());
+                rd.setNecessaryVelocityLimit((int) row.getCell(20).getNumericCellValue());
+                rd.setWaitVelocityLimit((int) row.getCell(20).getNumericCellValue());
                 add(rd);
                 }catch(IllegalStateException ex) {
               //  LOG.error("Помилка при імпортуванні Відомостей плітей: Лист: " + row.getSheet().getSheetName() + " Рядок:" + (row.getRowNum() + 1) + " Комірка;");

@@ -32,11 +32,11 @@ public class DrawRailwayItem {
     private void getRailwayItems(){
         for (int i=0;i<length;i+=scale){
             int kmS=(ii.kmS*1000+ii.mS+i)/1000;
-            int mS=(ii.mS+i>=1000)?ii.mS+i-1000:ii.mS+i;
+            int mS=(ii.mS+i>=1000)?(ii.mS+i)%1000:ii.mS+i;
             int kmE=(kmS*1000+mS+scale)/1000;
             int mE=(i+scale>length)?ii.mE:(mS+scale)%1000;
             railItem.add(new RailwayItem(scale, 
-                    new IntervalInformation(ii.idDirection, kmS, mS, kmE, mE, ii.line)));
+                    new IntervalInformation(ii.direction, kmS, mS, kmE, mE, ii.line,ii.railThread)));
         }
     }
     public List<RailwayItem> getList(){
@@ -44,8 +44,8 @@ public class DrawRailwayItem {
         return railItem;
     }
     public static void main(String ... args){
-        IntervalInformation ii =new IntervalInformation(22403, 193,1 , 194, 18, 1);
-        DrawRailwayItem dd=new DrawRailwayItem(100, ii);
+        IntervalInformation ii =new IntervalInformation("Дарниця - Полтава", 137,0 , 141, 1000, 1,"Ліва");
+        DrawRailwayItem dd=new DrawRailwayItem(500, ii);
         for (RailwayItem item:dd.getList()){
             item.saveImg();
         }

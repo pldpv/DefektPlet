@@ -38,6 +38,9 @@ public class DrawGovernedVelocity implements Drawable{
     public void draw() {
         Font f = new Font("Arial", Font.BOLD, lineHeight);
         FontMetrics fm = g2.getFontMetrics(f);
+        g2.setColor(Color.WHITE);
+        g2.fillRect(0,0,1000,lineHeight);
+        g2.setColor(Color.BLACK);        
         g2.drawLine(getEndX(), 0, getEndX(), lineHeight);
         g2.setColor(getColor());
         g2.drawString(getVelocity(), getStartX()+(getEndX()+getStartX()

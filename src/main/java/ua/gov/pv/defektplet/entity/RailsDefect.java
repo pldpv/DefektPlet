@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.Formula;
 
 /**
  *
@@ -48,6 +49,8 @@ public class RailsDefect {
     private Float defectWidth;
     private Integer necessaryVelocityLimit;
     private Integer waitVelocityLimit;
+    @Formula("km*1000+m")
+    private Integer coordinate;
 
     public int getId() {
         return id;
@@ -249,6 +252,12 @@ public class RailsDefect {
         this.waitVelocityLimit = waitVelocityLimit;
     }
 
-    
+    public Integer getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Integer coordinate) {
+        this.coordinate = coordinate;
+    }
 
 }

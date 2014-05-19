@@ -11,15 +11,17 @@ package ua.gov.pv.defektplet.helper;
  * @author �����
  */
 public class IntervalInformation {
-   public final Integer idDirection, kmS, mS, kmE, mE, line;
+   public final Integer kmS, mS, kmE, mE, line;
+   public final String direction,railThread;
 
-    public IntervalInformation(Integer idDirection, Integer kmS, Integer mS, Integer kmE, Integer mE, Integer line) {
-        this.idDirection = idDirection;
+    public IntervalInformation(String direction, Integer kmS, Integer mS, Integer kmE, Integer mE, Integer line,String railThread) {
+        this.direction = direction;
         this.kmS = kmS;
         this.mS = mS;
         this.kmE = kmE;
         this.mE = mE;
         this.line = line;
+        this.railThread=railThread;
     }
 
     
