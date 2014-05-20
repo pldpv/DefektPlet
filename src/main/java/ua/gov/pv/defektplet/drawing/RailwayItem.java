@@ -3,26 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.gov.pv.defektplet.helper;
+package ua.gov.pv.defektplet.drawing;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import javax.imageio.ImageIO;
-import ua.gov.pv.defektplet.drawing.DrawDefekt;
-import ua.gov.pv.defektplet.drawing.DrawRailsString;
-import ua.gov.pv.defektplet.drawing.DrawTemporaryRecovery;
-import ua.gov.pv.defektplet.drawing.Drawable;
-import ua.gov.pv.defektplet.drawing.DrawableList;
 import ua.gov.pv.defektplet.entity.RailsDefect;
 import ua.gov.pv.defektplet.entity.RailsStrings;
 import ua.gov.pv.defektplet.entity.TemporaryRecovery;
+import ua.gov.pv.defektplet.helper.DefektPletHelper;
+import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
  *
@@ -36,18 +32,16 @@ public class RailwayItem {
     DrawableList<Drawable> governedVelocity;
     DrawableList<Drawable> [] deviation;
 
-    private IntervalInformation ii;
-    private final int SCALE;
-    private static final int WIDTH=1000;
-    private static final int LINE_HEIGHT = 10;
-    private final Font FONT = new Font("Arial", Font.PLAIN, LINE_HEIGHT - 1);
+    private final IntervalInformation ii;
+    private final GraphicsCharacteristics gc;
     private BufferedImage bImage;
-    private DefektPletHelper helper;
+    private final DefektPletHelper helper;
 
-    public RailwayItem(Integer scale, IntervalInformation ii) {
-        this.SCALE = scale;
+    public RailwayItem(GraphicsCharacteristics gc, 
+            IntervalInformation ii) {
         this.ii = ii;
         helper=new DefektPletHelper(ii);
+        this.gc=gc;
     }
 
     public void draw() {
@@ -55,7 +49,7 @@ public class RailwayItem {
         BufferedImage b2 = draw(fillDef());
         BufferedImage b3 = draw(fillRailsString());
         draw(fillTempRec());
-       bImage = new BufferedImage(WIDTH, b1.getHeight() + b2.getHeight()
+        bImage = new BufferedImage(gc.IMG_WIDTH+gc.LEGEND_WIDTH, b1.getHeight() + b2.getHeight()
                 + b3.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
         g.drawImage(b1, 0, 0, null);
@@ -94,15 +88,11 @@ public class RailwayItem {
 //    }
 
     private BufferedImage drawRank() {
-        BufferedImage result = new BufferedImage(1000, LINE_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        BufferedImage result = new BufferedImage(gc.IMG_WIDTH+gc.LEGEND_WIDTH,
+                gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = result.createGraphics();
-        g2.setFont(FONT);
-        g2.drawRect(0, 0, 999, LINE_HEIGHT - 1);
-        FontMetrics fMetrics = g2.getFontMetrics(FONT);
-        for (int i = 0; i < 10; i++) {
-            float rank = (ii.kmS * 1000 + ii.mS - 1 + i * SCALE / 10) / 1000f;
-            g2.drawString(String.format("%.3f%n", rank), i * 100 - fMetrics.stringWidth(String.format("%.3f%n", rank)) / 2, LINE_HEIGHT - 1);
-        }
+        DrawRank dr=new DrawRank(ii, gc, g2);
+        dr.draw();
         return result;
     }
 
@@ -116,27 +106,23 @@ public class RailwayItem {
     }
 
 
-
-    
-
-    
-
-
     public DrawableList<Drawable> fillDef() {
-        BufferedImage bi = new BufferedImage(WIDTH, LINE_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        drawGrid(bi.createGraphics(),"Def");
+        BufferedImage bi = new BufferedImage(gc.IMG_WIDTH+gc.LEGEND_WIDTH,
+                gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        drawGrid(bi.createGraphics(),"Дефекты");
         railsDefect = new DrawableList<Drawable>(bi);
         for (RailsDefect rd : helper.getRailsDefectList()) {
-            railsDefect.add(new DrawDefekt(rd, bi.createGraphics(), ii, SCALE, LINE_HEIGHT,WIDTH));
+            railsDefect.add(new DrawDefekt(rd, gc, bi.createGraphics(), ii));
         }
         return railsDefect;
     }
     public DrawableList<Drawable> fillRailsString() {
-        BufferedImage bi = new BufferedImage(WIDTH, LINE_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        drawGrid(bi.createGraphics(),"PLet");
+        BufferedImage bi = new BufferedImage(gc.IMG_WIDTH+gc.LEGEND_WIDTH, 
+                gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        drawGrid(bi.createGraphics(),"Плеть/ВВ");
         railsString = new DrawableList<Drawable>(bi);
         for (RailsStrings rs : helper.getRailsStrings()) {
-            railsString.add(new DrawRailsString(rs, bi.createGraphics(), ii, SCALE, LINE_HEIGHT));
+            railsString.add(new DrawRailsString(rs, gc, bi.createGraphics(), ii));
         }
         return railsString;
     }
@@ -144,17 +130,22 @@ public class RailwayItem {
         temporaryRecovery = new DrawableList<Drawable>();
         temporaryRecovery.setbImage(railsString.getbImage());
         for (TemporaryRecovery tr : helper.getTemporaryRecovery()) {
-            temporaryRecovery.add(new DrawTemporaryRecovery(tr, temporaryRecovery.getbImage().createGraphics(), ii, SCALE, LINE_HEIGHT));
+            temporaryRecovery.add(new DrawTemporaryRecovery(tr, gc, 
+                    temporaryRecovery.getbImage().createGraphics(), ii));
         }
         return temporaryRecovery;
     }
     private void drawGrid(Graphics g, String legend){
         Graphics2D g2=(Graphics2D)g;
         g2.setColor(Color.WHITE);
-        g2.fillRect(0,0,WIDTH,LINE_HEIGHT);
+        g2.fillRect(0,0,gc.IMG_WIDTH+gc.LEGEND_WIDTH,gc.HEIGHT);
         g2.setColor(Color.BLACK);
-        g2.setFont(FONT);
-        FontMetrics fm = g2.getFontMetrics(FONT);
-        g2.drawString(legend, 10-fm.stringWidth(legend)/2, LINE_HEIGHT-1);
+     //   g2.drawRect(0, 0, gc.IMG_WIDTH+gc.LEGEND_WIDTH, gc.HEIGHT);
+        g2.setFont(gc.font);
+        FontMetrics fm = g2.getFontMetrics(gc.font);
+        g2.drawString(legend, gc.LEGEND_WIDTH/2-fm.stringWidth(legend)/2, gc.HEIGHT-1);
+    }
+    public BufferedImage getImage(){
+        return bImage;
     }
 }

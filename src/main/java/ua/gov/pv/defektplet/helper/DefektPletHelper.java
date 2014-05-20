@@ -27,7 +27,7 @@ public class DefektPletHelper {
     Session session = null;
     IntervalInformation ii;
 
-    DefektPletHelper(IntervalInformation ii) {
+    public DefektPletHelper(IntervalInformation ii) {
         this.ii = ii;
     }
 
@@ -52,6 +52,7 @@ public class DefektPletHelper {
         list = session.createCriteria(TemporaryRecovery.class)
                 .add(Restrictions.eq("direction", ii.direction))
                 .add(Restrictions.eq("line", ii.line))
+                .add(Restrictions.eq("railThread", ii.railThread))
                 .add(Restrictions.between("coordinate", ii.kmS * 1000 + ii.mS, ii.kmE * 1000 + ii.mE))
                 .list();
         session.close();

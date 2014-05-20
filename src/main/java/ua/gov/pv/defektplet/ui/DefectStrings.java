@@ -41,27 +41,10 @@ public class DefectStrings extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu3 = new javax.swing.JMenu();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuFile = new javax.swing.JMenu();
-        jMenuItemSave = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItemExit = new javax.swing.JMenuItem();
-        jMenuDB = new javax.swing.JMenu();
-        jMenuItemImport = new javax.swing.JMenuItem();
-        jMenuSettings = new javax.swing.JMenu();
-        jMenuHelp = new javax.swing.JMenu();
-
-        jMenu3.setText("jMenu3");
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setLayout(new java.awt.BorderLayout());
-        jTabbedPane1.addTab("tab1", null, jPanel1, "");
 
         jButton1.setText("SomeStuff");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,57 +52,35 @@ public class DefectStrings extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jTabbedPane1.addTab("tab2", jButton1);
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jMenuFile.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jMenuFile.setText("Файл");
-
-        jMenuItemSave.setText("Зберегти...");
-        jMenuFile.add(jMenuItemSave);
-        jMenuFile.add(jSeparator1);
-
-        jMenuItemExit.setText("Вихід");
-        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemExitActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jMenuFile.add(jMenuItemExit);
-
-        jMenuBar1.add(jMenuFile);
-
-        jMenuDB.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jMenuDB.setText("Робота с БД");
-
-        jMenuItemImport.setText("Імпортувати в БД...");
-        jMenuDB.add(jMenuItemImport);
-
-        jMenuBar1.add(jMenuDB);
-
-        jMenuSettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jMenuSettings.setText("Налаштування");
-        jMenuBar1.add(jMenuSettings);
-
-        jMenuHelp.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jMenuHelp.setText("Справка");
-        jMenuBar1.add(jMenuHelp);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(78, 78, 78)
+                .addComponent(jButton1)
+                .addContainerGap(239, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jButton1)
+                .addGap(44, 44, 44)
+                .addComponent(jButton2)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,9 +109,12 @@ public class DefectStrings extends javax.swing.JFrame {
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
       
     }//GEN-LAST:event_jMenuItemExitActionPerformed
-    public void tableFromDB(){
-        String [] columnsName ={"hjhg","hgj"};
-    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       NewJFrame1 jf=new NewJFrame1();
+       jf.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+ 
     /**
      * @param args the command line arguments
      */
@@ -191,18 +155,7 @@ public class DefectStrings extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuDB;
-    private javax.swing.JMenu jMenuFile;
-    private javax.swing.JMenu jMenuHelp;
-    private javax.swing.JMenuItem jMenuItemExit;
-    private javax.swing.JMenuItem jMenuItemImport;
-    private javax.swing.JMenuItem jMenuItemSave;
-    private javax.swing.JMenu jMenuSettings;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
     private JFileChooser chooseDirectory;
 }

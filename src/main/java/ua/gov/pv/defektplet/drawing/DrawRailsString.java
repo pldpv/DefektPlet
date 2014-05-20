@@ -18,26 +18,23 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
  */
 public class DrawRailsString implements Drawable {
 
-    private IntervalInformation ii;
-    private int scale;
+    private final IntervalInformation ii;
     private final RailsStrings rs;
-    private final Integer lineHeight;
     private final Graphics2D g2;
     private final Integer linePos;
+    private final GraphicsCharacteristics gc;
 
-    public DrawRailsString(RailsStrings rs, Graphics g, IntervalInformation ii, int scale, int lineHeight) {
+    public DrawRailsString(RailsStrings rs, GraphicsCharacteristics gh,
+            Graphics g, IntervalInformation ii) {
         this.ii = ii;
-        this.scale = scale;
         this.rs = rs;
-        this.lineHeight = lineHeight;
         g2 = (Graphics2D) g;
-        linePos = lineHeight / 2;
+        this.gc = gh;
+        linePos = gh.HEIGHT / 2;
 
     }
 
     public void draw() {
-        g2.setColor(Color.WHITE);
-        g2.fillRect(0, 0, 1000, lineHeight);
         g2.setColor(Color.BLACK);
         BasicStroke pen = new BasicStroke(2);
         g2.setStroke(pen);
@@ -46,17 +43,21 @@ public class DrawRailsString implements Drawable {
 
     private int getStartX() {
         if (rs.getKmS() * 1000 + rs.getmS() > ii.kmS * 1000 + ii.mS) {
-            return (int) ((rs.getKmS() - ii.kmS) * 1000 + rs.getmS() - ii.mS) * 1000 / scale;
+            return (int) (gc.LEGEND_WIDTH
+                    + ((rs.getKmS() - ii.kmS) * 1000 + rs.getmS() - ii.mS)
+                    * gc.IMG_WIDTH / gc.SCALE);
         } else {
-            return 0;
+            return gc.LEGEND_WIDTH;
         }
     }
 
     private int getEndX() {
         if (rs.getKmE() * 1000 + rs.getmE() < ii.kmE * 1000 + ii.mE) {
-            return (int) ((rs.getKmE() - ii.kmS) * 1000 + rs.getmE() - ii.mS) * 1000 / scale;
+            return (int) (gc.LEGEND_WIDTH
+                    + ((rs.getKmE() - ii.kmS) * 1000 + rs.getmE() - ii.mS)
+                    * gc.IMG_WIDTH / gc.SCALE);
         } else {
-            return 1000;
+            return gc.IMG_WIDTH + gc.LEGEND_WIDTH;
         }
     }
 }

@@ -8,7 +8,6 @@ package ua.gov.pv.defektplet.drawing;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.HashMap;
 import ua.gov.pv.defektplet.entity.Deviation;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
@@ -19,27 +18,25 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
 public class DrawDeviation implements Drawable {
 
     private IntervalInformation ii;
-    private int scale;
     private final Deviation deviation;
-    private final Integer lineHeight;
     private final int penWidth;
     private final Graphics2D g2;
+    private final GraphicsCharacteristics gc;
 
-    public DrawDeviation(Deviation dev, Graphics g, IntervalInformation ii, int scale, int lineHeight) {
+    public DrawDeviation(Deviation dev, GraphicsCharacteristics gh,Graphics g, IntervalInformation ii) {
         this.ii = ii;
-        this.scale = scale;
         this.deviation = dev;
-        this.lineHeight = lineHeight;
+        this.gc=gh;
         g2 = (Graphics2D) g;
-        penWidth = 1000 / scale;
+        penWidth =  gh.IMG_WIDTH/gh.SCALE;
 
     }
 
     public void draw() {
         g2.setColor(Color.WHITE);
-        g2.fillRect(0, 0, 1000, lineHeight);
+        g2.fillRect(0, 0, 1000, gc.HEIGHT);
         g2.setColor(getColor());
-        g2.fillRect(getX(), 0, penWidth, lineHeight);
+        g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
     }
 
     private Color getColor() {
@@ -55,7 +52,7 @@ public class DrawDeviation implements Drawable {
     }
 
     private int getX() {
-        return ((deviation.getKm() - ii.kmS) * 1000 + deviation.getM() - ii.mS) * 1000 / scale;
+        return ((deviation.getKm() - ii.kmS) * 1000 + deviation.getM() - ii.mS) * gc.IMG_WIDTH / gc.SCALE;
     }
 
 }

@@ -7,8 +7,6 @@ package ua.gov.pv.defektplet.drawing;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

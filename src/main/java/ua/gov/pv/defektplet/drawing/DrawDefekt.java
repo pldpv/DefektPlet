@@ -8,7 +8,6 @@ package ua.gov.pv.defektplet.drawing;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import ua.gov.pv.defektplet.entity.RailsDefect;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
@@ -18,32 +17,30 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
  */
 public class DrawDefekt implements Drawable {
 
-    private IntervalInformation ii;
-    private int scale;
-    private RailsDefect rd;
-    private final Integer lineHeight;
-    private int penWidth;
-    private Graphics2D g2;
-    private final Integer WIDTH;
+    private final IntervalInformation ii;
+    private final RailsDefect rd;
+    private final int penWidth;
+    private final GraphicsCharacteristics gc;
+    private final Graphics2D g2;
 
-    public DrawDefekt(RailsDefect rd, Graphics g, IntervalInformation ii,
-            int scale, int lineHeight, Integer width) {
+    public DrawDefekt(RailsDefect rd, GraphicsCharacteristics gh,
+            Graphics g, IntervalInformation ii) {
         this.ii = ii;
-        this.scale = scale;
         this.rd = rd;
-        this.lineHeight = lineHeight;
         g2 = (Graphics2D) g;
-        penWidth = 1000 / scale;
-        this.WIDTH = width;
+        this.gc = gh;
+        penWidth = gh.IMG_WIDTH / gh.SCALE;
     }
 
+    @Override
     public void draw() {
         g2.setColor(Color.BLACK);
-        g2.fillRect(getX(), 0, penWidth, lineHeight);
+        g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
     }
 
     private int getX() {
-        return ((rd.getKm() - ii.kmS) * 1000 + rd.getM() - ii.mS) * 1000 / scale;
+        return gc.LEGEND_WIDTH + ((rd.getKm() - ii.kmS) * 1000 + rd.getM() - ii.mS)
+                * gc.IMG_WIDTH / gc.SCALE;
     }
 
 }
