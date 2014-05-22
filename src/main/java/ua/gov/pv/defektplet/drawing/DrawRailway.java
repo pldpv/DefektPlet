@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
+import ua.gov.pv.defektplet.util.DrawDefectList;
+import ua.gov.pv.defektplet.util.DrawableList;
 
 /**
  *
@@ -16,25 +18,33 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
  */
 public class DrawRailway {
 
-    private List<RailwayItem> railItem = new ArrayList<RailwayItem>();
-    private final IntervalInformation ii;
+    ;
     private final Integer length;
-    private static GraphicsCharacteristics gc;
+    
     private List<BufferedImage> bImage = new ArrayList<BufferedImage>();
-
-    public DrawRailway(GraphicsCharacteristics gc, IntervalInformation ii) {
+    
+    private Integer numberOfItems=10;
+    private Integer scale;
+    private Integer screenWidth;
+    private IntervalInformation [] ii= new IntervalInformation[1];
+    private List<DrawableList> list= new ArrayList<DrawableList>();
+    private static GraphicsCharacteristics gc;
+    private List<RailwayItem> rItemList= new ArrayList<RailwayItem>();
+    
+    public DrawRailway(IntervalInformation [] ii,List<DrawableList> list) {
         this.ii = ii;
-        this.gc = gc;
-        length = (ii.kmE - ii.kmS) * 1000 + (ii.mE - ii.mS);
+        this.list=list;
+        length = (ii[0].kmE - ii[0].kmS) * 1000 + (ii[0].mE - ii[0].mS);
+        gc=new GraphicsCharacteristics(screenWidth/numberOfItems, 0, 10, scale/numberOfItems);
     }
 
     private void createRailwayItems() {
         for (int i = 0; i < length; i += gc.SCALE) {
-            int kmS = (ii.kmS * 1000 + ii.mS + i) / 1000;
-            int mS = (ii.mS + i >= 1000) ? (ii.mS + i) % 1000 : ii.mS + i;
+            int kmS = (ii[0].kmS * 1000 + ii[0].mS + i) / 1000;
+            int mS = (ii[0].mS + i >= 1000) ? (ii[0].mS + i) % 1000 : ii[0].mS + i;
             int kmE = (kmS * 1000 + mS + gc.SCALE) / 1000;
-            int mE = (i + gc.SCALE > length) ? ii.mE : (mS + gc.SCALE) % 1000;
-            railItem.add(new RailwayItem(gc, new IntervalInformation(ii.direction, kmS, mS, kmE, mE, ii.line, ii.railThread)));
+            int mE = (i + gc.SCALE > length) ? ii[0].mE : (mS + gc.SCALE) % 1000;
+            railItemList.add(new RailwayItem(gc, new IntervalInformation());
         }
     }
     public void setDrawable(){

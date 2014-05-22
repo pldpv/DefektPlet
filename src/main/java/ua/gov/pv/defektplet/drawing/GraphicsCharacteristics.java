@@ -21,9 +21,9 @@ public class GraphicsCharacteristics {
         this.SCALE = SCALE;
         this.font = new Font("Arial", Font.PLAIN, HEIGHT - 1);
     }
-    final Integer IMG_WIDTH;
-    final Integer LEGEND_WIDTH;
-    final Integer HEIGHT;
-    final Integer SCALE;
-    Font font;
+    public final Integer IMG_WIDTH;
+    public final Integer LEGEND_WIDTH;
+    public final Integer HEIGHT;
+    public final Integer SCALE;
+    public Font font;
 }
