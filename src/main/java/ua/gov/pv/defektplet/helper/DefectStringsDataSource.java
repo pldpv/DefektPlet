@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import ua.gov.pv.defektplet.entity.Deviation;
+import ua.gov.pv.defektplet.entity.Direction;
 import ua.gov.pv.defektplet.entity.GovernedVelocity;
 import ua.gov.pv.defektplet.entity.RailsDefect;
 import ua.gov.pv.defektplet.entity.RailsStrings;
@@ -102,5 +103,15 @@ public class DefectStringsDataSource {
                 .list();
         session.close();
         return list;
+    }
+
+    public Direction getDirectionByNameLine(String direction, int line) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Direction dir;
+        dir = (Direction) session.createCriteria(Direction.class)
+                .add(Restrictions.eq("direction", direction))
+                .add(Restrictions.eq("line", line)).uniqueResult();
+        session.close();
+        return dir;
     }
 }

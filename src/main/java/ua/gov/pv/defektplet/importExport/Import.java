@@ -62,6 +62,9 @@ public class Import {
             case "відомість д":
                 list = new RailsDefectList(rowList);
                 break;
+            case "напрямки":
+                list = new DirectionList(rowList);
+                break;
         }
         return list;
     }
