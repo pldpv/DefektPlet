@@ -6,6 +6,11 @@
 
 package ua.gov.pv.defektplet.util;
 
+import java.util.List;
+import org.eclipse.persistence.platform.database.InformixPlatform;
+import ua.gov.pv.defektplet.drawing.DrawableFactory;
+import ua.gov.pv.defektplet.drawing.GraphicsCharacteristics;
+import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -13,8 +18,15 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
  * @author ПГМ
  */
 public class FillDrawableList {
-    private IntervalInformation ii;
-    public FillDrawableList(IntervalInformation ii){
+    private final IntervalInformation ii;
+    private final GraphicsCharacteristics gc;
+    public FillDrawableList(IntervalInformation ii, GraphicsCharacteristics gc){
         this.ii=ii;
+        this.gc=gc;
+    }
+    public void fillList(DrawableList listToFill, List data){
+        for(Object obj:data){
+            listToFill.add(DrawableFactory.createDrawable(obj, ii, gc));
+        }
     }
 }

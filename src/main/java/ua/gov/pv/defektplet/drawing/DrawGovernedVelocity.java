@@ -21,18 +21,19 @@ public class DrawGovernedVelocity implements Drawable {
 
     private final IntervalInformation ii;
     private final GovernedVelocity gv;
-    private final Graphics2D g2;
     private final GraphicsCharacteristics gc;
 
     public DrawGovernedVelocity(GovernedVelocity gv, GraphicsCharacteristics gh,
-            Graphics g, IntervalInformation ii) {
+             IntervalInformation ii) {
         this.gv = gv;
-        g2 = (Graphics2D) g;
+       
         this.ii = ii;
         this.gc = gh;
     }
 
-    public void draw() {
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2= (Graphics2D) g;
         FontMetrics fm = g2.getFontMetrics(gc.font);
         g2.setColor(Color.BLACK);
         g2.drawLine(getEndX(), 0, getEndX(), gc.HEIGHT);
@@ -43,20 +44,20 @@ public class DrawGovernedVelocity implements Drawable {
     }
 
     private int getStartX() {
-        if (gv.getKmS() * 1000 + gv.getmS() < ii.kmS * 1000 + ii.mS) {
+        if (gv.getKmS() * 1000 + gv.getmS() < ii.getKmS() * 1000 + ii.getmS()) {
             return gc.LEGEND_WIDTH;
         } else {
-            return gc.LEGEND_WIDTH + ((gv.getKmS() - ii.kmS) * 1000 + gv.getmS() - ii.kmS)
+            return gc.LEGEND_WIDTH + ((gv.getKmS() - ii.getKmS()) * 1000 + gv.getmS() - ii.getKmS())
                     * gc.IMG_WIDTH / gc.SCALE;
         }
     }
 
     private int getEndX() {
-        if (gv.getKmE() * 1000 + gv.getmE() < ii.kmE * 1000 + ii.mE) {
-            return ((gv.getKmE() - ii.kmS) * 1000 + gv.getmE() - ii.mS)
+        if (gv.getKmE() * 1000 + gv.getmE() < ii.getKmE() * 1000 + ii.getmE()) {
+            return ((gv.getKmE() - ii.getKmS()) * 1000 + gv.getmE() - ii.getmS())
                     * gc.IMG_WIDTH / gc.SCALE;
         } else {
-            return ((ii.kmE - ii.kmS) * 1000 - ii.mS + ii.mE) 
+            return ((ii.getKmE() - ii.getKmS()) * 1000 - ii.getmS() + ii.getmE()) 
                     * gc.IMG_WIDTH / gc.SCALE;
         }
     }

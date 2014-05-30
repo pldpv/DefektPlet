@@ -20,19 +20,19 @@ public class DrawDeviation implements Drawable {
     private IntervalInformation ii;
     private final Deviation deviation;
     private final int penWidth;
-    private final Graphics2D g2;
     private final GraphicsCharacteristics gc;
 
-    public DrawDeviation(Deviation dev, GraphicsCharacteristics gh,Graphics g, IntervalInformation ii) {
+    public DrawDeviation(Deviation dev, GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.deviation = dev;
         this.gc=gh;
-        g2 = (Graphics2D) g;
         penWidth =  gh.IMG_WIDTH/gh.SCALE;
 
     }
 
-    public void draw() {
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2=(Graphics2D) g;
         g2.setColor(Color.WHITE);
         g2.fillRect(0, 0, 1000, gc.HEIGHT);
         g2.setColor(getColor());
@@ -52,7 +52,7 @@ public class DrawDeviation implements Drawable {
     }
 
     private int getX() {
-        return ((deviation.getKm() - ii.kmS) * 1000 + deviation.getM() - ii.mS) * gc.IMG_WIDTH / gc.SCALE;
+        return ((deviation.getKm() - ii.getKmS()) * 1000 + deviation.getM() - ii.getmS()) * gc.IMG_WIDTH / gc.SCALE;
     }
 
 }

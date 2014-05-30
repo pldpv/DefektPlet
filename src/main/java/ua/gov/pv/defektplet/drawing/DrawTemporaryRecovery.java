@@ -21,18 +21,18 @@ public class DrawTemporaryRecovery implements Drawable {
 
     private IntervalInformation ii;
     private final TemporaryRecovery tr;
-    private final Graphics2D g2;
     private final GraphicsCharacteristics gc;
 
     public DrawTemporaryRecovery(TemporaryRecovery tr,
-            GraphicsCharacteristics gh, Graphics g, IntervalInformation ii) {
+            GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.tr = tr;
         this.gc = gh;
-        g2 = (Graphics2D) g;
+
     }
 
-    public void draw() {
+    public void draw(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
         FontMetrics fm = g2.getFontMetrics(gc.font);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setFont(gc.font);
@@ -46,7 +46,7 @@ public class DrawTemporaryRecovery implements Drawable {
 
     private int getX() {
         return gc.LEGEND_WIDTH
-                + ((tr.getKm() - ii.kmS) * 1000 + tr.getM() - ii.mS)
+                + ((tr.getKm() - ii.getKmS()) * 1000 + tr.getM() - ii.getmS())
                 * gc.IMG_WIDTH / gc.SCALE;
     }
 

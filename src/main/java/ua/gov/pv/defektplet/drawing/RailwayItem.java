@@ -5,63 +5,38 @@
  */
 package ua.gov.pv.defektplet.drawing;
 
-import ua.gov.pv.defektplet.util.DrawableList;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import javax.imageio.ImageIO;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import javax.swing.JCheckBox;
+import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
+import ua.gov.pv.defektplet.helper.IntervalInformation;
+import ua.gov.pv.defektplet.util.DrawableList;
 
 /**
  *
- * @author
+ * @author ПГМ
  */
 public class RailwayItem {
 
-    List<DrawableList> drawableList;
+    private final IntervalInformation ii;
+    private final GraphicsCharacteristics gc;
+    private final JCheckBox[] cb;
+    private final List<DrawableList> railwayItem = new ArrayList<DrawableList>();
 
-    private BufferedImage bImage;
-    public static final Logger LOG=Logger.getLogger(RailwayItem.class);
-    public RailwayItem(List<DrawableList> drawableList) {
-        this.drawableList = drawableList;
-        draw();
+    public RailwayItem(JCheckBox[] cb, IntervalInformation ii, GraphicsCharacteristics gc) {
+        this.cb = cb;
+        this.ii = ii;
+        this.gc = gc;
     }
 
-    private void draw() {
-        bImage = new BufferedImage(getImageWidth(), getImageHeight(), 
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = bImage.getGraphics();
-        int height=0;
-        for (DrawableList dl:drawableList){
-            g.drawImage(dl.getbImage(), 0, height, null);
-            height+=dl.getbImage().getHeight();
-         
-        }
-        g.dispose();
-        
+    private void createRailwayItem() {
+        ii.setRailThread("Права");
+        railwayItem.addAll(new RailwayThread(cb, ii, gc).getRailThread());
+        ii.setRailThread("Ліва");
+        railwayItem.addAll(new RailwayThread(cb, ii, gc).getRailThread());
     }
-    private int getImageHeight(){
-        int result=0;
-        for (DrawableList dl:drawableList){
-            result+=dl.getbImage().getHeight();
-        }
-        return result;
-    }
-    private int getImageWidth(){
-        return drawableList.get(0).getbImage().getWidth();
-    }
-    public void saveImg(String fileName) {
-        draw();
-        try {
-            ImageIO.write(bImage, "PNG", new File("c:\\"+fileName+".PNG"));
-        } catch (IOException ex) {
-            LOG.log(Level.ERROR, ex);
-        }
-    }
-    public BufferedImage getImage() {
-        return bImage;
+    public List<DrawableList> getRailwayItem(){
+        return railwayItem;
     }
 }

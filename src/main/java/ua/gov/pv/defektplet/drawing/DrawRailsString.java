@@ -20,21 +20,21 @@ public class DrawRailsString implements Drawable {
 
     private final IntervalInformation ii;
     private final RailsStrings rs;
-    private final Graphics2D g2;
     private final Integer linePos;
     private final GraphicsCharacteristics gc;
 
     public DrawRailsString(RailsStrings rs, GraphicsCharacteristics gh,
-            Graphics g, IntervalInformation ii) {
+            IntervalInformation ii) {
         this.ii = ii;
         this.rs = rs;
-        g2 = (Graphics2D) g;
         this.gc = gh;
         linePos = gh.HEIGHT / 2;
 
     }
 
-    public void draw() {
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
         BasicStroke pen = new BasicStroke(2);
         g2.setStroke(pen);
@@ -42,9 +42,9 @@ public class DrawRailsString implements Drawable {
     }
 
     private int getStartX() {
-        if (rs.getKmS() * 1000 + rs.getmS() > ii.kmS * 1000 + ii.mS) {
+        if (rs.getKmS() * 1000 + rs.getmS() > ii.getKmS() * 1000 + ii.getmS()) {
             return (int) (gc.LEGEND_WIDTH
-                    + ((rs.getKmS() - ii.kmS) * 1000 + rs.getmS() - ii.mS)
+                    + ((rs.getKmS() - ii.getKmS()) * 1000 + rs.getmS() - ii.getmS())
                     * gc.IMG_WIDTH / gc.SCALE);
         } else {
             return gc.LEGEND_WIDTH;
@@ -52,9 +52,9 @@ public class DrawRailsString implements Drawable {
     }
 
     private int getEndX() {
-        if (rs.getKmE() * 1000 + rs.getmE() < ii.kmE * 1000 + ii.mE) {
+        if (rs.getKmE() * 1000 + rs.getmE() < ii.getKmE() * 1000 + ii.getmE()) {
             return (int) (gc.LEGEND_WIDTH
-                    + ((rs.getKmE() - ii.kmS) * 1000 + rs.getmE() - ii.mS)
+                    + ((rs.getKmE() - ii.getKmS()) * 1000 + rs.getmE() - ii.getmS())
                     * gc.IMG_WIDTH / gc.SCALE);
         } else {
             return gc.IMG_WIDTH + gc.LEGEND_WIDTH;

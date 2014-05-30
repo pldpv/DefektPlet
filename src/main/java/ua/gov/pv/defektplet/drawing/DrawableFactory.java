@@ -5,17 +5,11 @@
  */
 package ua.gov.pv.defektplet.drawing;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.Entity;
 import ua.gov.pv.defektplet.entity.Deviation;
 import ua.gov.pv.defektplet.entity.GovernedVelocity;
 import ua.gov.pv.defektplet.entity.RailsDefect;
 import ua.gov.pv.defektplet.entity.RailsStrings;
 import ua.gov.pv.defektplet.entity.TemporaryRecovery;
-import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -25,33 +19,24 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
 public class DrawableFactory {
 
     
-    public static Drawable createDrawable(Object obj,IntervalInformation ii, GraphicsCharacteristics gc,Graphics g) {
+    public static Drawable createDrawable(Object obj,IntervalInformation ii, GraphicsCharacteristics gc) {
         if (obj instanceof Deviation) {
-            return new DrawDeviation((Deviation) obj, gc, g, ii);
+            return new DrawDeviation((Deviation) obj, gc, ii);
         }
         if (obj instanceof GovernedVelocity) {
-            return new DrawGovernedVelocity((GovernedVelocity) obj, gc, g, ii);
+            return new DrawGovernedVelocity((GovernedVelocity) obj, gc, ii);
         }
         if (obj instanceof RailsDefect) {
-            return new DrawDefekt((RailsDefect) obj, gc, g, ii);
+            return new DrawDefekt((RailsDefect) obj, gc, ii);
         }
         if (obj instanceof RailsStrings) {
-            return new DrawRailsString( (RailsStrings) obj, gc, g, ii);
+            return new DrawRailsString( (RailsStrings) obj, gc, ii);
         }
         if (obj instanceof TemporaryRecovery) {
-            return new DrawTemporaryRecovery( (TemporaryRecovery) obj, gc, g, ii);
+            return new DrawTemporaryRecovery( (TemporaryRecovery) obj, gc, ii);
         }
         return null;
 
     }
-    public static void main(String ... args){
-        List<Drawable> list=new ArrayList<Drawable>();
-        GraphicsCharacteristics gc = new GraphicsCharacteristics(10, 0, 10, 100);
-        IntervalInformation ii = new IntervalInformation("Дарниця - Полтава", 223, 0, 230, 0, 1, "Ліва");
-        for (Object obj:new DefectStringsDataSource().getRailsStrings("Дарниця - Полтава", 1,"Ліва", 223, 0, 230, 0)){
-            list.add(createDrawable(obj, ii, gc, new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB).createGraphics()));
-        }
-    System.out.println();
-    }
-    
+        
 }

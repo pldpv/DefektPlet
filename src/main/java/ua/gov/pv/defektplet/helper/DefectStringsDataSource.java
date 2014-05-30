@@ -25,92 +25,88 @@ import ua.gov.pv.defektplet.util.HibernateUtil;
 public class DefectStringsDataSource {
 
     Session session = null;
-
-    public DefectStringsDataSource() {
+    private IntervalInformation ii;
+    public DefectStringsDataSource(IntervalInformation ii) {
+    this.ii=ii;
     }
 
-    public List<RailsStrings> getRailsStrings(String direction, int line,
-            String railThread, int kmS, int mS, int kmE, int mE) {
+    public List<RailsStrings> getRailsStrings() {
         List<RailsStrings> list = null;
         session = HibernateUtil.getSessionFactory().openSession();
-        Criterion cr1 = Restrictions.le("startCoordinate", kmE * 1000 + mE);
-        Criterion cr2 = Restrictions.ge("endCoordinate", kmS * 1000 + mS);
+        Criterion cr1 = Restrictions.le("startCoordinate", ii.getKmE() * 1000 + ii.getmE());
+        Criterion cr2 = Restrictions.ge("endCoordinate", ii.getKmS() * 1000 + ii.getmS());
         list = session.createCriteria(RailsStrings.class)
-                .add(Restrictions.eq("direction", direction))
-                .add(Restrictions.eq("line", line))
-                .add(Restrictions.eq("railThread", railThread))
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine()))
+                .add(Restrictions.eq("railThread", ii.getRailThread()))
                 .add(Restrictions.and(cr1, cr2))
                 .list();
         session.close();
         return list;
     }
 
-    public List<TemporaryRecovery> getTemporaryRecovery(String direction, int line,
-            String railThread, int kmS, int mS, int kmE, int mE) {
+    public List<TemporaryRecovery> getTemporaryRecovery() {
         List<TemporaryRecovery> list = new ArrayList<TemporaryRecovery>();
         session = HibernateUtil.getSessionFactory().openSession();
         list = session.createCriteria(TemporaryRecovery.class)
-                .add(Restrictions.eq("direction", direction))
-                .add(Restrictions.eq("line", line))
-                .add(Restrictions.eq("railThread", railThread))
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine()))
+                .add(Restrictions.eq("railThread", ii.getRailThread()))
                 .add(Restrictions.between("coordinate",
-                                kmS * 1000 + mS, kmE * 1000 + mE))
+                                ii.getKmS() * 1000 + ii.getmS(), ii.getKmE() * 1000 + ii.getmE()))
                 .list();
         session.close();
         return list;
     }
 
-    public List<RailsDefect> getRailsDefectList(String direction, int line,
-            String railThread, int kmS, int mS, int kmE, int mE) {
+    public List<RailsDefect> getRailsDefectList() {
         List<RailsDefect> list = null;
         session = HibernateUtil.getSessionFactory().openSession();
         list = session.createCriteria(RailsDefect.class)
-                .add(Restrictions.eq("direction", direction))
-                .add(Restrictions.eq("line", line))
-                .add(Restrictions.eq("railThread", railThread))
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine()))
+                .add(Restrictions.eq("railThread", ii.getRailThread()))
                 .add(Restrictions.between("coordinate",
-                                kmS * 1000 + mS, kmE * 1000 + mE))
+                                ii.getKmS() * 1000 + ii.getmS(), ii.getKmE() * 1000 + ii.getmE()))
                 .list();
         session.close();
         return list;
     }
 
-    public List<Deviation> getDeviations(String devType, String direction,
-            int line, int kmS, int mS, int kmE, int mE) {
+    public List<Deviation> getDeviations(String devType) {
         List<Deviation> list;
         session = HibernateUtil.getSessionFactory().openSession();
         list = session.createCriteria(Deviation.class)
-                .add(Restrictions.eq("direction", direction))
-                .add(Restrictions.eq("line", line))
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine()))
                 .add(Restrictions.between("coordinate",
-                                kmS * 1000 + mS, kmE * 1000 + mE))
+                                ii.getKmS() * 1000 + ii.getmS(), ii.getKmE() * 1000 + ii.getmE()))
                 .add(Restrictions.eq("deviation", devType))
                 .list();
         session.close();
         return list;
     }
 
-    public List<GovernedVelocity> getGovernedVelocity(String direction,
-            int line, int kmS, int mS, int kmE, int mE) {
+    public List<GovernedVelocity> getGovernedVelocity() {
         List<GovernedVelocity> list;
         session = HibernateUtil.getSessionFactory().openSession();
-        Criterion cr1 = Restrictions.le("startCoordinate", kmE * 1000 + mE);
-        Criterion cr2 = Restrictions.ge("endCoordinate", kmS * 1000 + mS);
+        Criterion cr1 = Restrictions.le("startCoordinate", ii.getKmE() * 1000 + ii.getmE());
+        Criterion cr2 = Restrictions.ge("endCoordinate", ii.getKmS() * 1000 + ii.getmS());
         list = session.createCriteria(GovernedVelocity.class)
-                .add(Restrictions.eq("direction", direction))
-                .add(Restrictions.eq("line", line))
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine()))
                 .add(Restrictions.and(cr1, cr2))
                 .list();
         session.close();
         return list;
     }
 
-    public Direction getDirectionByNameLine(String direction, int line) {
+    public Direction getDirectionByNameLine() {
         session = HibernateUtil.getSessionFactory().openSession();
         Direction dir;
         dir = (Direction) session.createCriteria(Direction.class)
-                .add(Restrictions.eq("direction", direction))
-                .add(Restrictions.eq("line", line)).uniqueResult();
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine())).uniqueResult();
         session.close();
         return dir;
     }

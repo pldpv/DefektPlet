@@ -15,12 +15,6 @@ import javax.swing.JCheckBox;
 import ua.gov.pv.defektplet.entity.Direction;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
-import ua.gov.pv.defektplet.util.DrawDefectList;
-import ua.gov.pv.defektplet.util.DrawDeviationList;
-import ua.gov.pv.defektplet.util.DrawGovernedVelocityList;
-import ua.gov.pv.defektplet.util.DrawRailsStringList;
-import ua.gov.pv.defektplet.util.DrawRankList;
-import ua.gov.pv.defektplet.util.DrawTemporaryRecoveryList;
 import ua.gov.pv.defektplet.util.DrawableList;
 
 /**
@@ -40,8 +34,8 @@ public class DrawRailway {
     private IntervalInformation ii;
     private static GraphicsCharacteristics gc;
 
-    public LinkedList<RailwayItem> rItemLeftList = new LinkedList<RailwayItem>();
-    private LinkedList<RailwayItem> rItemRightList = new LinkedList<RailwayItem>();
+    public LinkedList<DrawRailwayItem> rItemLeftList = new LinkedList<DrawRailwayItem>();
+    private LinkedList<DrawRailwayItem> rItemRightList = new LinkedList<DrawRailwayItem>();
     JCheckBox[] cb;
     int listIndex;
 
@@ -53,10 +47,10 @@ public class DrawRailway {
         this.ii = ii;
         this.scale = scale / numberOfItems;
         this.direction = new DefectStringsDataSource().
-                getDirectionByNameLine(ii.direction, ii.line);
+                getDirectionByNameLine(ii.getDirection(), ii.getLine());
         minIndex = -(ii.kmS * 1000 + ii.mS - getDirectionStart(direction)+1)
                 / this.scale;
-        maxIndex = (getDirectionEnd(direction) - (ii.kmS * 1000 - ii.mS)+1)
+        maxIndex = (getDirectionEnd(direction) - (ii.getKmS() * 1000 - ii.getmS())+1)
                 / this.scale;
         currentIndex = 0;
         gc = new GraphicsCharacteristics(imageWidth / numberOfItems, 0,
@@ -183,52 +177,18 @@ public class DrawRailway {
         return bImage;
     }
 
-    private RailwayItem createRItemByIndex(int index, String railThread) {
-        return new RailwayItem(createDrawableList(
+    private DrawRailwayItem createRItemByIndex(int index, String railThread) {
+        return new DrawRailwayItem(createDrawableList(
                 createIntervalByIndex(index, railThread)));
     }
 
-    private List<DrawableList> createDrawableList(IntervalInformation ii) {
+        private IntervalInformation createIntervalByIndex(int index, String railThread) {
 
-        List<DrawableList> result = new ArrayList<DrawableList>();
-        if (ii.railThread.equals("Права")) {
-            result.add(new DrawRankList(ii, gc));
-            result.add(new DrawGovernedVelocityList(ii, gc));
-            if (cb[2].isSelected()) {
-                result.add(new DrawDeviationList(ii, gc, "Р"));
-            }
-            if (cb[3].isSelected()) {
-                result.add(new DrawDeviationList(ii, gc, "П"));
-            }
-            if (cb[4].isSelected()) {
-                result.add(new DrawDeviationList(ii, gc, "Пр.л"));
-                result.add(new DrawDeviationList(ii, gc, "Пр.п"));
-            }
-            if (cb[5].isSelected()) {
-                result.add(new DrawDeviationList(ii, gc, "У"));
-            }
-            if (cb[6].isSelected()) {
-                result.add(new DrawDeviationList(ii, gc, "Суж"));
-            }
-        }
-        result.add(new DrawRailsStringList(ii, gc));
-        if (cb[0].isSelected()) {
-            result.add(new DrawDefectList(ii, gc));
-        }
-        if (cb[1].isSelected()) {
-            result.add(new DrawTemporaryRecoveryList(ii, gc));
-        }
-
-        return result;
-    }
-
-    private IntervalInformation createIntervalByIndex(int index, String railThread) {
-
-        int kmS = (ii.kmS * 1000 + ii.mS + index * scale + 1) / 1000;
-        int mS = Math.abs(ii.kmS * 1000 + ii.mS + index * scale) % 1000;
+        int kmS = (ii.getKmS() * 1000 + ii.getmS() + index * scale + 1) / 1000;
+        int mS = Math.abs(ii.getKmS() * 1000 + ii.getmS() + index * scale) % 1000;
         int kmE = (kmS * 1000 + mS + scale) / 1000;
         int mE = (mS + scale) % 1000;
-        return new IntervalInformation(ii.direction, kmS, mS, kmE, mE, ii.line, railThread);
+        return new IntervalInformation(ii.getDirection(), kmS, mS, kmE, mE, ii.getLine(), railThread);
     }
 
     private int getDirectionStart(Direction d) {
@@ -239,17 +199,6 @@ public class DrawRailway {
         return d.getKmE() * 1000 + d.getmE();
     }
 
-    public static void main(String... args) {
-        IntervalInformation i;
-        i = new IntervalInformation("Дарниця - Полтава", 100, 0, 101, 1000, 1, "Ліва");
-        GraphicsCharacteristics gch = new GraphicsCharacteristics(1000, 0, 10, 1000);
-        DrawRailway dd = new DrawRailway(i, 10000, new JCheckBox[10]);
-        ListIterator it = dd.iterator();
-        while (it.hasNext()) {
-            it.next();
-        }
-        dd.cacheRItem();
-        System.exit(0);
-    }
+    
 
 }

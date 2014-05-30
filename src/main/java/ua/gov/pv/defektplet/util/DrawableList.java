@@ -5,38 +5,35 @@
  */
 package ua.gov.pv.defektplet.util;
 
-import java.awt.Image;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import ua.gov.pv.defektplet.drawing.Drawable;
-import ua.gov.pv.defektplet.drawing.GraphicsCharacteristics;
-import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
  *
  * @author Евген
  * @param <T>
  */
-public abstract class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
+public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
 
     
-    IntervalInformation ii;
-    GraphicsCharacteristics gc;
-
-    public DrawableList(IntervalInformation ii, GraphicsCharacteristics gc) {
-        this.ii = ii;
-        this.gc = gc;
+    private final BufferedImage bImage;
+    public DrawableList(BufferedImage bImage) {
+        this.bImage=bImage;
     }
 
     public void draw() {
+        Graphics2D g2 = (Graphics2D) bImage.createGraphics();
+        g2.setColor(Color.WHITE);
+        g2.fillRect(0, 0, bImage.getWidth(),bImage.getHeight());
         for (Drawable d : this) {
-            d.draw();
+            d.draw(g2);
         }
     }
 
-    
-
-    abstract void fillList();
-
-    abstract BufferedImage getbImage();
+    public BufferedImage getbImage(){
+        return bImage;
+    }
 }

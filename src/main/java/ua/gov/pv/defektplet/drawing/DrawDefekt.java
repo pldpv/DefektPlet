@@ -21,25 +21,23 @@ public class DrawDefekt implements Drawable {
     private final RailsDefect rd;
     private final int penWidth;
     private final GraphicsCharacteristics gc;
-    private final Graphics2D g2;
 
-    public DrawDefekt(RailsDefect rd, GraphicsCharacteristics gh,
-            Graphics g, IntervalInformation ii) {
+    public DrawDefekt(RailsDefect rd, GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.rd = rd;
-        g2 = (Graphics2D) g;
         this.gc = gh;
         penWidth = gh.IMG_WIDTH / gh.SCALE;
     }
 
     @Override
-    public void draw() {
+    public void draw(Graphics g) {
+        Graphics2D g2=(Graphics2D) g;
         g2.setColor(Color.BLACK);
         g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
     }
 
     private int getX() {
-        return gc.LEGEND_WIDTH + ((rd.getKm() - ii.kmS) * 1000 + rd.getM() - ii.mS)
+        return gc.LEGEND_WIDTH + ((rd.getKm() - ii.getKmS()) * 1000 + rd.getM() - ii.getmS())
                 * gc.IMG_WIDTH / gc.SCALE;
     }
 
