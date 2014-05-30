@@ -12,5 +12,8 @@
     <mapping class="ua.gov.pv.defektplet.entity.RailsDefect"/>
     <mapping class="ua.gov.pv.defektplet.entity.RailsStrings"/>
     <mapping class="ua.gov.pv.defektplet.entity.TemporaryRecovery"/>
+    <mapping class="ua.gov.pv.defektplet.entity.Deviation"/>
+    <mapping class="ua.gov.pv.defektplet.entity.Direction"/>
+    <mapping class="ua.gov.pv.defektplet.entity.GovernedVelocity"/>
   </session-factory>
 </hibernate-configuration>

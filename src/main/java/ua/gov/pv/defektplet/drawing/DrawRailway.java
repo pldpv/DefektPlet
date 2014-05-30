@@ -11,11 +11,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import javax.swing.JCheckBox;
 import ua.gov.pv.defektplet.entity.Direction;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 import ua.gov.pv.defektplet.util.DrawDefectList;
+import ua.gov.pv.defektplet.util.DrawDeviationList;
+import ua.gov.pv.defektplet.util.DrawGovernedVelocityList;
 import ua.gov.pv.defektplet.util.DrawRailsStringList;
+import ua.gov.pv.defektplet.util.DrawRankList;
+import ua.gov.pv.defektplet.util.DrawTemporaryRecoveryList;
 import ua.gov.pv.defektplet.util.DrawableList;
 
 /**
@@ -26,43 +31,51 @@ public class DrawRailway {
 
     private BufferedImage bImage;
     private Integer numberOfItems = 10;
-    private Integer scale=1000;
-    private Integer cacheSize = 7 * numberOfItems;
-    private Integer imageWidth=1000;
+    private Integer scale;
+    private Integer cacheSize = 3 * numberOfItems;
+    private Integer leftCache,rightCache;
+    private Integer imageWidth = 1000;
     private int minIndex, maxIndex, currentIndex;
 
-    private IntervalInformation[] ii = new IntervalInformation[1];
-    private List<DrawableList> list = new ArrayList<DrawableList>();
+    private IntervalInformation ii;
     private static GraphicsCharacteristics gc;
 
-    private LinkedList<RailwayItem> rItemLeftList = new LinkedList<RailwayItem>();
+    public LinkedList<RailwayItem> rItemLeftList = new LinkedList<RailwayItem>();
     private LinkedList<RailwayItem> rItemRightList = new LinkedList<RailwayItem>();
+    JCheckBox[] cb;
+    int listIndex;
 
     private final Direction direction;
 
-    public DrawRailway(IntervalInformation[] ii, List<DrawableList> list) {
+    public DrawRailway(IntervalInformation ii, Integer scale,
+            JCheckBox[] cb) {
+        this.cb = cb;
         this.ii = ii;
-        direction = new DefectStringsDataSource().
-                getDirectionByNameLine(ii[0].direction, ii[0].line);
-        this.list = list;
-//        minIndex = -((ii[0].kmS - direction.getKmS())
-//                * 1000 + ii[0].mS - direction.getmS()) / scale / numberOfItems + 1;
-//        maxIndex = ((direction.getKmE() - ii[0].kmE)
-//                * 1000 + direction.getmE() - ii[0].mE) / scale / numberOfItems + 1;
+        this.scale = scale / numberOfItems;
+        this.direction = new DefectStringsDataSource().
+                getDirectionByNameLine(ii.direction, ii.line);
+        minIndex = -(ii.kmS * 1000 + ii.mS - getDirectionStart(direction)+1)
+                / this.scale;
+        maxIndex = (getDirectionEnd(direction) - (ii.kmS * 1000 - ii.mS)+1)
+                / this.scale;
         currentIndex = 0;
         gc = new GraphicsCharacteristics(imageWidth / numberOfItems, 0,
-                10, scale / numberOfItems);
+                10, this.scale);
+
+        cacheRItem();
 
     }
 
-//    private void createRailwayItems() {
-//        for (int i = 0; i < length; i += gc.SCALE) {
-//            int kmS = (ii[0].kmS * 1000 + ii[0].mS + i) / 1000;
-//            int mS = (ii[0].mS + i >= 1000) ? (ii[0].mS + i) % 1000 : ii[0].mS + i;
-//            int kmE = (kmS * 1000 + mS + gc.SCALE) / 1000;
-//            int mE = (i + gc.SCALE > length) ? ii[0].mE : (mS + gc.SCALE) % 1000;
-//        }
-//    }
+    private void cacheRItem() {
+        leftCache = (-cacheSize > minIndex) ? -cacheSize : Math.abs(minIndex);
+        listIndex = Math.abs(leftCache);
+        rightCache = (cacheSize + numberOfItems < maxIndex) ? cacheSize : maxIndex;
+        for (int i = -leftCache; i < rightCache + numberOfItems; i++) {
+            rItemLeftList.add(createRItemByIndex(i, "Ліва"));
+            rItemRightList.add(createRItemByIndex(i, "Права"));
+        }
+        System.out.println(minIndex);
+    }
 
     public ListIterator iterator() {
         return new ListIterator() {
@@ -75,13 +88,20 @@ public class DrawRailway {
             @Override
             public Object next() {
                 ++currentIndex;
-                int index = (Math.abs(minIndex - currentIndex) > (cacheSize - numberOfItems) / 2)
-                        ? (cacheSize - numberOfItems) / 2 : Math.abs(minIndex - currentIndex);
-                draw(index);
                 rItemRightList.removeFirst();
                 rItemLeftList.removeFirst();
-                rItemRightList.addLast(null);
-                rItemLeftList.addLast(null);
+                if (currentIndex + numberOfItems + rightCache <= maxIndex) {
+                    rItemLeftList.addLast(createRItemByIndex(currentIndex + numberOfItems + cacheSize, "Ліва"));
+                    rItemRightList.addLast(createRItemByIndex(currentIndex + numberOfItems + cacheSize, "Права"));
+                } else {
+                    ++listIndex;
+                    --rightCache;
+                }
+                if (currentIndex-leftCache>minIndex&&leftCache<cacheSize){
+                    leftCache++;
+                    ++listIndex;
+                }
+                draw();
                 return null;
             }
 
@@ -92,6 +112,28 @@ public class DrawRailway {
 
             @Override
             public Object previous() {
+                --currentIndex;
+                int index = (Math.abs(minIndex - currentIndex) > (cacheSize - numberOfItems) / 2)
+                        ? (cacheSize - numberOfItems) / 2 : Math.abs(minIndex - currentIndex);
+                rItemRightList.removeLast();
+                rItemLeftList.removeLast();
+           
+                if (currentIndex -  leftCache > minIndex) {
+                    rItemLeftList.addFirst(createRItemByIndex(currentIndex  - cacheSize, "Ліва"));
+                    rItemRightList.addFirst(createRItemByIndex(currentIndex  - cacheSize, "Права"));
+                }else{
+                  listIndex--;  
+                  leftCache--;
+                }
+                if (currentIndex+numberOfItems+rightCache<=maxIndex&&rightCache<cacheSize){
+                    rightCache++;
+                }
+                draw();
+                System.out.println(listIndex);
+                System.out.println(currentIndex);
+                System.out.println(minIndex);
+                System.out.println(leftCache);
+                System.out.println();
                 return null;
             }
 
@@ -122,21 +164,71 @@ public class DrawRailway {
         };
     }
 
-    public void draw(int currentIndex) {
-        bImage = new BufferedImage(imageWidth, 2 * rItemLeftList.get(currentIndex).getImage().getHeight(),
+    public void draw() {
+        int imgHeight = rItemLeftList.get(listIndex).getImage().getHeight() + rItemRightList.get(listIndex).getImage().getHeight();
+        bImage = new BufferedImage(imageWidth, imgHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
-        for (int i = 0; i < 10; i++) {
-            g.drawImage(rItemLeftList.get(currentIndex + i).getImage(),
+        for (int i = 0; i < numberOfItems; i++) {
+            g.drawImage(rItemRightList.get(listIndex + i).getImage(),
                     imageWidth / numberOfItems * i, 0, null);
-            g.drawImage(rItemRightList.get(currentIndex + i).getImage(),
-                    imageWidth / numberOfItems * i, bImage.getHeight(), null);
+            g.drawImage(rItemLeftList.get(listIndex + i).getImage(),
+                    imageWidth / numberOfItems * i, rItemRightList.get(listIndex).getImage().getHeight(), null);
+
         }
         g.dispose();
     }
 
     public BufferedImage getImage() {
         return bImage;
+    }
+
+    private RailwayItem createRItemByIndex(int index, String railThread) {
+        return new RailwayItem(createDrawableList(
+                createIntervalByIndex(index, railThread)));
+    }
+
+    private List<DrawableList> createDrawableList(IntervalInformation ii) {
+
+        List<DrawableList> result = new ArrayList<DrawableList>();
+        if (ii.railThread.equals("Права")) {
+            result.add(new DrawRankList(ii, gc));
+            result.add(new DrawGovernedVelocityList(ii, gc));
+            if (cb[2].isSelected()) {
+                result.add(new DrawDeviationList(ii, gc, "Р"));
+            }
+            if (cb[3].isSelected()) {
+                result.add(new DrawDeviationList(ii, gc, "П"));
+            }
+            if (cb[4].isSelected()) {
+                result.add(new DrawDeviationList(ii, gc, "Пр.л"));
+                result.add(new DrawDeviationList(ii, gc, "Пр.п"));
+            }
+            if (cb[5].isSelected()) {
+                result.add(new DrawDeviationList(ii, gc, "У"));
+            }
+            if (cb[6].isSelected()) {
+                result.add(new DrawDeviationList(ii, gc, "Суж"));
+            }
+        }
+        result.add(new DrawRailsStringList(ii, gc));
+        if (cb[0].isSelected()) {
+            result.add(new DrawDefectList(ii, gc));
+        }
+        if (cb[1].isSelected()) {
+            result.add(new DrawTemporaryRecoveryList(ii, gc));
+        }
+
+        return result;
+    }
+
+    private IntervalInformation createIntervalByIndex(int index, String railThread) {
+
+        int kmS = (ii.kmS * 1000 + ii.mS + index * scale + 1) / 1000;
+        int mS = Math.abs(ii.kmS * 1000 + ii.mS + index * scale) % 1000;
+        int kmE = (kmS * 1000 + mS + scale) / 1000;
+        int mE = (mS + scale) % 1000;
+        return new IntervalInformation(ii.direction, kmS, mS, kmE, mE, ii.line, railThread);
     }
 
     private int getDirectionStart(Direction d) {
@@ -148,22 +240,16 @@ public class DrawRailway {
     }
 
     public static void main(String... args) {
-        IntervalInformation [] i =new IntervalInformation[2];
-        i[0] = new IntervalInformation("Дарниця - Полтава", 137, 0, 141, 1000, 1, "Ліва");
-        i[1] = new IntervalInformation("Дарниця - Полтава", 137, 0, 141, 1000, 1, "Ліва");
-        GraphicsCharacteristics gch = new GraphicsCharacteristics(1000, 50, 10, 2000);
-        List<DrawableList> list = new ArrayList<DrawableList>();
-        list.add(new DrawDefectList());
-        list.add(new DrawRailsStringList());
-        DrawRailway dd = new DrawRailway(i,list);
-        for (DrawableList drawList:list){
-            System.out.println(drawList.getClass().);
+        IntervalInformation i;
+        i = new IntervalInformation("Дарниця - Полтава", 100, 0, 101, 1000, 1, "Ліва");
+        GraphicsCharacteristics gch = new GraphicsCharacteristics(1000, 0, 10, 1000);
+        DrawRailway dd = new DrawRailway(i, 10000, new JCheckBox[10]);
+        ListIterator it = dd.iterator();
+        while (it.hasNext()) {
+            it.next();
         }
+        dd.cacheRItem();
         System.exit(0);
     }
-    private void createDrawableList(List<DrawableList> list){
-        for (DrawableList drawList:list){
-            
-        }
-    }
+
 }

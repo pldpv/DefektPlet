@@ -20,15 +20,14 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
  * @author ПГМ
  * @param <T>
  */
-public class DrawRailsStringList<T extends Drawable> extends DrawableList<Drawable> {
-
+public final class DrawRailsStringList<T extends Drawable> extends DrawableList<Drawable> {
+BufferedImage bImage;
     public DrawRailsStringList(IntervalInformation ii, GraphicsCharacteristics gc) {
         super(ii, gc);
         bImage = new BufferedImage(gc.IMG_WIDTH + gc.LEGEND_WIDTH,
                 gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
-    }
-
-    public DrawRailsStringList() {
+        fillList();
+        draw();
     }
 
     @Override
@@ -46,5 +45,8 @@ public class DrawRailsStringList<T extends Drawable> extends DrawableList<Drawab
                         ii.kmS, ii.mS, ii.kmE, ii.mE)) {
             this.add(new DrawRailsString(rs, gc, bImage.createGraphics(), ii));
         }
+    }
+    public BufferedImage getbImage() {
+        return bImage;
     }
 }

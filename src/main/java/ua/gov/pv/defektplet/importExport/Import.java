@@ -7,6 +7,8 @@ package ua.gov.pv.defektplet.importExport;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.HibernateException;
@@ -20,7 +22,7 @@ import org.hibernate.Transaction;
 public class Import {
 
     private final File file;
-
+    static ResourceBundle importProperties = ResourceBundle.getBundle("importFiles");
     public Import(File file) {
         this.file = file;
     }

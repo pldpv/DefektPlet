@@ -5,6 +5,7 @@
  */
 package ua.gov.pv.defektplet.util;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import ua.gov.pv.defektplet.drawing.Drawable;
@@ -18,7 +19,7 @@ import ua.gov.pv.defektplet.helper.IntervalInformation;
  */
 public abstract class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
 
-    BufferedImage bImage;
+    
     IntervalInformation ii;
     GraphicsCharacteristics gc;
 
@@ -26,18 +27,16 @@ public abstract class DrawableList<T extends Drawable> extends ArrayList<Drawabl
         this.ii = ii;
         this.gc = gc;
     }
-    public DrawableList(){
-        
-    }
+
     public void draw() {
         for (Drawable d : this) {
             d.draw();
         }
     }
 
-    public BufferedImage getbImage() {
-        return bImage;
-    }
+    
 
     abstract void fillList();
+
+    abstract BufferedImage getbImage();
 }

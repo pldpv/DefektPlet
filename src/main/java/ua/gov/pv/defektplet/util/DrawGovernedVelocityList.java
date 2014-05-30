@@ -8,21 +8,22 @@ package ua.gov.pv.defektplet.util;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import ua.gov.pv.defektplet.drawing.DrawTemporaryRecovery;
+import ua.gov.pv.defektplet.drawing.DrawDefekt;
+import ua.gov.pv.defektplet.drawing.DrawGovernedVelocity;
 import ua.gov.pv.defektplet.drawing.Drawable;
 import ua.gov.pv.defektplet.drawing.GraphicsCharacteristics;
-import ua.gov.pv.defektplet.entity.TemporaryRecovery;
+import ua.gov.pv.defektplet.entity.GovernedVelocity;
+import ua.gov.pv.defektplet.entity.RailsDefect;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
  *
  * @author ПГМ
- * @param <T>
  */
-public final class DrawTemporaryRecoveryList<T extends Drawable> extends DrawableList<Drawable> {
+public final class DrawGovernedVelocityList<T extends Drawable> extends DrawableList<Drawable> {
 BufferedImage bImage;
-    public DrawTemporaryRecoveryList(IntervalInformation ii,
+    public DrawGovernedVelocityList(IntervalInformation ii,
             GraphicsCharacteristics gc) {
         super(ii, gc);
         bImage = new BufferedImage(gc.IMG_WIDTH + gc.LEGEND_WIDTH,
@@ -32,23 +33,22 @@ BufferedImage bImage;
     }
 
     @Override
+    void fillList() {
+        for (GovernedVelocity gv : new DefectStringsDataSource().
+                getGovernedVelocity(ii.direction, ii.line,
+                        ii.kmS, ii.mS, ii.kmE, ii.mE)) {
+            this.add(new DrawGovernedVelocity(gv, gc, bImage.createGraphics(), ii));
+        }
+    }
+
+    @Override
     public void draw() {
         Graphics2D g2 = (Graphics2D) bImage.createGraphics();
         g2.setColor(Color.WHITE);
         g2.fillRect(0, 0, gc.IMG_WIDTH + gc.LEGEND_WIDTH, gc.HEIGHT);
         super.draw();
     }
-
-    @Override
-    void fillList() {
-        for (TemporaryRecovery tr : new DefectStringsDataSource().
-                getTemporaryRecovery(ii.direction, ii.line, ii.railThread,
-                        ii.kmS, ii.mS, ii.kmE, ii.mE)) {
-            this.add(new DrawTemporaryRecovery(tr, gc, bImage.createGraphics(), ii));
-        }
-    }
     public BufferedImage getbImage() {
         return bImage;
     }
-
 }

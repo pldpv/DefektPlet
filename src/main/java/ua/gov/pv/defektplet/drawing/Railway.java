@@ -4,17 +4,12 @@
  * and open the template in the editor.
  */
 
-package ua.gov.pv.defektplet.ui;
-
-import javax.swing.JPanel;
+package ua.gov.pv.defektplet.drawing;
 
 /**
  *
- * @author Евген
+ * @author ПГМ
  */
-public class DefectStringsQuery extends JPanel{
-    private void initComponents() {
-        
-    }
+public class Railway {
     
 }

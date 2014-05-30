@@ -139,11 +139,6 @@ public class NewJFrame1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawRailwayFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawRailwayFormActionPerformed
-//        ChooseForm cf= new ChooseForm(
-//            new IntervalInformation(getJtDirection(), getJtKmS(), getJtmS(), getJtKmE(), getJtmE(),getJtLine(),"Ліва"),
-//            new IntervalInformation(getJtDirection(), getJtKmS(), getJtmS(), getJtKmE(), getJtmE(),getJtLine(),"Права"));
-        ChooseForm cf=new ChooseForm();
-        cf.setVisible(true);
 
     }//GEN-LAST:event_drawRailwayFormActionPerformed
 

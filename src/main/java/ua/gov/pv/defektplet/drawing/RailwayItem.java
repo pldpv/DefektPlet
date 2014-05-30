@@ -21,11 +21,11 @@ import org.apache.log4j.Logger;
  */
 public class RailwayItem {
 
-    List<DrawableList<? extends Drawable>> drawableList;
+    List<DrawableList> drawableList;
 
     private BufferedImage bImage;
     public static final Logger LOG=Logger.getLogger(RailwayItem.class);
-    public RailwayItem(List<DrawableList<? extends Drawable>> drawableList) {
+    public RailwayItem(List<DrawableList> drawableList) {
         this.drawableList = drawableList;
         draw();
     }
@@ -34,12 +34,14 @@ public class RailwayItem {
         bImage = new BufferedImage(getImageWidth(), getImageHeight(), 
                 BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
+        int height=0;
         for (DrawableList dl:drawableList){
-            int height=0;
             g.drawImage(dl.getbImage(), 0, height, null);
             height+=dl.getbImage().getHeight();
+         
         }
         g.dispose();
+        
     }
     private int getImageHeight(){
         int result=0;
