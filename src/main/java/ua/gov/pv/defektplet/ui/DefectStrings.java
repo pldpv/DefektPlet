@@ -16,6 +16,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import ua.gov.pv.defektplet.importExport.DefektPletDAO;
 import ua.gov.pv.defektplet.importExport.Import;
+import ua.gov.pv.defektplet.util.HibernateUtil;
 
 /**
  *
@@ -119,6 +120,7 @@ public class DefectStrings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        HibernateUtil.getSessionFactory().openSession();
         try {
             chooseDirectory = new JFileChooser();
             chooseDirectory.setDialogTitle("Выберите папку с файлами");

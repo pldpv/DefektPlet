@@ -6,10 +6,8 @@
 package ua.gov.pv.defektplet.drawing;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.JCheckBox;
-import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 import ua.gov.pv.defektplet.util.DrawableList;
 
@@ -37,6 +35,7 @@ public class RailwayItem {
         railwayItem.addAll(new RailwayThread(cb, ii, gc).getRailThread());
     }
     public List<DrawableList> getRailwayItem(){
+        createRailwayItem();
         return railwayItem;
     }
 }

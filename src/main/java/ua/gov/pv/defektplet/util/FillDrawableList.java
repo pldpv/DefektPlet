@@ -7,7 +7,6 @@
 package ua.gov.pv.defektplet.util;
 
 import java.util.List;
-import org.eclipse.persistence.platform.database.InformixPlatform;
 import ua.gov.pv.defektplet.drawing.DrawableFactory;
 import ua.gov.pv.defektplet.drawing.GraphicsCharacteristics;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;

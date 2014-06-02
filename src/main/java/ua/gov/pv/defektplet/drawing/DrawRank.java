@@ -53,7 +53,7 @@ public class DrawRank implements Drawable {
 
     private String getPk(int m) {
         String str;
-        str = (meterToPK(m) == 9) ? String.valueOf(1+(ii.getKmS() * 1000 + m) / 1000)+"км"
+        str = (meterToPK(m) == 9||meterToPK(m) == 0) ? String.valueOf(1+(ii.getKmS() * 1000 + m) / 1000)+"км"
                 : meterToPK(m) + "/" + (meterToPK(m) + 1);
         return str;
     }

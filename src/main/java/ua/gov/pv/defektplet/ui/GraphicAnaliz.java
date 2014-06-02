@@ -59,6 +59,7 @@ public class GraphicAnaliz extends JPanel {
                         choosePanel.getKm() + choosePanel.getScale() * 1000 / 1000,
                         choosePanel.getScale() % 1000, choosePanel.getLine(), null),
                         choosePanel.getScale() * 1000, choosePanel.drawCheckBox);
+                drawRailway.cacheRItem();
                 iterator = drawRailway.iterator();
                 drawRailway.draw();
                 if (ip == null) {

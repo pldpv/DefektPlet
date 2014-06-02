@@ -20,6 +20,7 @@ public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
 
     
     private final BufferedImage bImage;
+    
     public DrawableList(BufferedImage bImage) {
         this.bImage=bImage;
     }

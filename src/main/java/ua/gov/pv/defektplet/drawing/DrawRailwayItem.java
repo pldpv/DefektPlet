@@ -12,8 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+
 
 /**
  *
@@ -21,12 +20,10 @@ import org.apache.log4j.Logger;
  */
 public class DrawRailwayItem {
 
-    List<DrawableList> drawableList;
-
+    private List<DrawableList> drawableList;
     private BufferedImage bImage;
-    public static final Logger LOG=Logger.getLogger(DrawRailwayItem.class);
-    public DrawRailwayItem(List<DrawableList> drawableList) {
-        this.drawableList = drawableList;
+    public DrawRailwayItem(RailwayItem railwayItem) {
+        this.drawableList = railwayItem.getRailwayItem();
     }
 
     public void draw() {
@@ -35,9 +32,9 @@ public class DrawRailwayItem {
         Graphics g = bImage.getGraphics();
         int height=0;
         for (DrawableList dl:drawableList){
+            dl.draw();
             g.drawImage(dl.getbImage(), 0, height, null);
             height+=dl.getbImage().getHeight();
-         
         }
         g.dispose();
         
@@ -52,14 +49,7 @@ public class DrawRailwayItem {
     private int getImageWidth(){
         return drawableList.get(0).getbImage().getWidth();
     }
-    public void saveImg(String fileName) {
-
-        try {
-            ImageIO.write(bImage, "PNG", new File("c:\\"+fileName+".PNG"));
-        } catch (IOException ex) {
-            LOG.log(Level.ERROR, ex);
-        }
-    }
+    
     public BufferedImage getImage() {
         return bImage;
     }

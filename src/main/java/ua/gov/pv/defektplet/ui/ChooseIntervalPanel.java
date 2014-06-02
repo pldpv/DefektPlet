@@ -8,18 +8,12 @@ package ua.gov.pv.defektplet.ui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ListIterator;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import ua.gov.pv.defektplet.drawing.DrawRailway;
-import ua.gov.pv.defektplet.helper.IntervalInformation;
 import static ua.gov.pv.defektplet.ui.Someclass.labels;
 
 /**
