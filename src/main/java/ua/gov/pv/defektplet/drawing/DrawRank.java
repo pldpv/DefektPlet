@@ -43,7 +43,7 @@ public class DrawRank implements Drawable {
             g2.drawLine(x, gc.HEIGHT, x, gc.HEIGHT - 2);
             if (i == gc.SCALE) {
                 g2.drawString(getPk(ii.getmS() + i),
-                        x - fm.stringWidth(getPk(ii.getmS() + i)), gc.HEIGHT - 3);
+                        x - fm.stringWidth(getPk(ii.getmS() + i))/2, gc.HEIGHT - 3);
             } else {
                 g2.drawString(getPk(ii.getmS() + i),
                         x - fm.stringWidth(getPk(ii.getmS() + i)) / 2, gc.HEIGHT - 3);
@@ -53,8 +53,8 @@ public class DrawRank implements Drawable {
 
     private String getPk(int m) {
         String str;
-        str = (meterToPK(m) == 9||meterToPK(m) == 0) ? String.valueOf(1+(ii.getKmS() * 1000 + m) / 1000)+"км"
-                : meterToPK(m) + "/" + (meterToPK(m) + 1);
+        str = (meterToPK(m) == 10||meterToPK(m) == 0) ? String.valueOf(1+(ii.getKmS() * 1000 + m) / 1000)+"км"
+                : meterToPK(m-1) + "/" + (meterToPK(m));
         return str;
     }
 

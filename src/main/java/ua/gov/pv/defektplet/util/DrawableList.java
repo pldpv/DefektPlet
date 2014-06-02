@@ -6,6 +6,7 @@
 package ua.gov.pv.defektplet.util;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
 
     
     private final BufferedImage bImage;
-    
     public DrawableList(BufferedImage bImage) {
         this.bImage=bImage;
     }

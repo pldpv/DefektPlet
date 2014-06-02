@@ -21,7 +21,7 @@ public class Someclass {
 
     private JMenuBar jMenuBar;
     private TabPaneClosable tabPane;
-    static ResourceBundle labels = ResourceBundle.getBundle("DefectStrings");
+    static ResourceBundle labels = ResourceBundle.getBundle("DefectStrings",new Locale("ua"));
     static Dimension screenSize = 
                     Toolkit.getDefaultToolkit().getScreenSize();
     public Someclass() {

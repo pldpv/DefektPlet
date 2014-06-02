@@ -43,17 +43,9 @@ public class DrawRailway {
         this.cb = cb;
         this.ii = ii;
         this.scale = scale / numberOfItems;
-        // this.direction = new DefectStringsDataSource(ii).
-        //          getDirectionByNameLine();
-        //Test
-        this.direction = new Direction();
-        direction.setId(2);
-        direction.setDirection("Дарниця - Полтава");
-        direction.setLine(1);
-        direction.setKmS(1);
-        direction.setmS(1);
-        direction.setKmE(338);
-        direction.setmE(1);
+         this.direction = new DefectStringsDataSource(ii).
+                  getDirectionByNameLine();
+       
 
         minIndex = -(ii.getKmS() * 1000 + ii.getmS() - getDirectionStart(direction) + 1)
                 / this.scale;
@@ -167,7 +159,7 @@ public class DrawRailway {
 
     }
     private BufferedImage drawRank(){
-        int kmS = (ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale + 1) / 1000;
+        int kmS = (ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) / 1000;
         int mS = Math.abs(ii.getKmS() * 1000 + ii.getmS() +currentIndex * scale) % 1000;
         int kmE = (kmS * 1000 + mS + scale*numberOfItems) / 1000;
         int mE = (mS + scale*numberOfItems) % 1000;

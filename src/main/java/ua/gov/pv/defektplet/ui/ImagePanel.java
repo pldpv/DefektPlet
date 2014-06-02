@@ -17,7 +17,9 @@ public class ImagePanel extends JPanel{
     Dimension d;
     public ImagePanel(BufferedImage bImage){
         this.image=bImage;
-        result =new BufferedImage(Someclass.screenSize.width, image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        int imgWidth=Someclass.screenSize.width-100;
+        int imgHeight=bImage.getHeight()*imgWidth/image.getWidth();
+        result =new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
         setSize(new Dimension(result.getWidth(), result.getHeight()));
         paintComponent(result.createGraphics());
         try {

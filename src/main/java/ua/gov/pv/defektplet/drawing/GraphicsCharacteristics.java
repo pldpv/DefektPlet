@@ -19,7 +19,7 @@ public class GraphicsCharacteristics {
         this.LEGEND_WIDTH = LEGEND_WIDTH;
         this.HEIGHT = HEIGHT;
         this.SCALE = SCALE;
-        this.font = new Font("Arial", Font.PLAIN, HEIGHT - 1);
+        this.font = new Font("Arial", Font.PLAIN, HEIGHT-1);
     }
     public final Integer IMG_WIDTH;
     public final Integer LEGEND_WIDTH;

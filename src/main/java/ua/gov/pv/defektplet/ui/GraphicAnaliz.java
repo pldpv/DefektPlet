@@ -5,15 +5,11 @@
  */
 package ua.gov.pv.defektplet.ui;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ListIterator;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import ua.gov.pv.defektplet.drawing.DrawRailway;
 import ua.gov.pv.defektplet.helper.IntervalInformation;

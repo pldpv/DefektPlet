@@ -23,7 +23,8 @@ public class RailwayThread {
     private final IntervalInformation ii;
     private final GraphicsCharacteristics gc;
     private final JCheckBox[] cb;
-    private List<DrawableList> railThread=new ArrayList<DrawableList>();
+    private List<DrawableList> railThread = new ArrayList<DrawableList>();
+
     public RailwayThread(JCheckBox[] cb, IntervalInformation ii, GraphicsCharacteristics gc) {
         this.cb = cb;
         this.ii = ii;
@@ -66,29 +67,28 @@ public class RailwayThread {
                 railThread.add(narrowPart);
             }
         }
-        BufferedImage stringsImage=createBImage(1);
-        DrawableList railStrings = new DrawableList(stringsImage);
+        DrawableList railStrings = new DrawableList(createBImage(1));
         fillDrawable.fillList(railStrings, helper.getRailsStrings());
-        railThread.add(railStrings);
         if (cb[0].isSelected()) {
             DrawableList railDefect = new DrawableList(createBImage(1));
             fillDrawable.fillList(railDefect, helper.getRailsDefectList());
             railThread.add(railDefect);
         }
         if (cb[1].isSelected()) {
-            DrawableList tempRecovery = new DrawableList(createBImage(1));
-            fillDrawable.fillList(tempRecovery, helper.getTemporaryRecovery());
-            railThread.add(tempRecovery);
+            fillDrawable.fillList(railStrings, helper.getTemporaryRecovery());
         }
+        railThread.add(railStrings);
+
     }
 
     private BufferedImage createBImage(Integer numberOfLines) {
         return new BufferedImage(gc.IMG_WIDTH, gc.HEIGHT * numberOfLines,
                 BufferedImage.TYPE_INT_RGB);
     }
-    public List<DrawableList> getRailThread(){
+
+    public List<DrawableList> getRailThread() {
         createDrawableList();
         return railThread;
     }
-    
+
 }
