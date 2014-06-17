@@ -9,12 +9,15 @@ import java.awt.image.BufferedImage;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.util.GraphicsContent;
 
 /**
  *
  * @author Евген
  */
-public class CacheRailway extends HashMap<Integer, BufferedImage> {
+public class CacheRailway extends HashMap<Integer, GraphicsContent<BufferedImage,List<? extends CharacteristicsInfo>>> {
 
     private final int MAX_SIZE;
     private int minIndex, maxIndex;

@@ -28,20 +28,17 @@ public class DrawDefekt implements Drawable {
         return info;
     }
 
-    public void setInfo(CharacteristicsInfo info) {
-        this.info = info;
-    }
     public DrawDefekt(RailsDefect rd, GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.rd = rd;
         this.gc = gh;
         penWidth = gh.IMG_WIDTH / gh.SCALE;
-        info=new CharacteristicsInfo(getX(), 0, penWidth, gc.HEIGHT, info());
+        info = new CharacteristicsInfo(getX(),gc.HEIGHT , penWidth, gc.HEIGHT, info());
     }
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2=(Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
         g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
     }
@@ -50,13 +47,15 @@ public class DrawDefekt implements Drawable {
         return gc.LEGEND_WIDTH + ((rd.getKm() - ii.getKmS()) * 1000 + rd.getM() - ii.getmS())
                 * gc.IMG_WIDTH / gc.SCALE;
     }
-    private StringBuffer info(){
-        StringBuffer result=new StringBuffer();
-        result.append("Код: "+rd.getDefectCode()+"\n");
-        result.append("Длина: "+rd.getDefectLength()+"\n");
-        result.append("Глубина: "+rd.getDefectHeight()+"\n");
-        result.append("Ширина: "+rd.getDefectWidth()+"\n");
-        result.append("Дата: "+rd.getDateOfFounding());
+
+    private String info() {
+        String eol = System.getProperty("line.separator");
+        String result = new String(
+                "Код: " + rd.getDefectCode() + eol
+                + "Длина: " + rd.getDefectLength() + eol
+                + "Глубина: " + rd.getDefectHeight() + eol
+                + "Ширина: " + rd.getDefectWidth() + eol
+                + "Дата: " + rd.getDateOfFounding());
         return result;
     }
 }

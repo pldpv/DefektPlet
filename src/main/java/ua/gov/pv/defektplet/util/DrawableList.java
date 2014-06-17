@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import ua.gov.pv.defektplet.drawing.Drawable;
 import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
@@ -21,24 +22,41 @@ import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
  */
 public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
 
-    
     private final BufferedImage bImage;
+    private List<CharacteristicsInfo> info;
+
     public DrawableList(BufferedImage bImage) {
-        this.bImage=bImage;
+        this.info = new ArrayList<CharacteristicsInfo>();
+        this.bImage = bImage;
     }
 
     public void draw() {
         Graphics2D g2 = (Graphics2D) bImage.createGraphics();
         g2.setColor(Color.WHITE);
-        g2.fillRect(0, 0, bImage.getWidth(),bImage.getHeight());
+        g2.fillRect(0, 0, bImage.getWidth(), bImage.getHeight());
         for (Drawable d : this) {
             d.draw(g2);
-            
+
         }
     }
 
-    public BufferedImage getbImage(){
+    public BufferedImage getbImage() {
         return bImage;
     }
-    
+
+    private void createInfoList(int y_pos) {
+        for (Drawable d : this) {
+            if (d.getInfo() != null) {
+                CharacteristicsInfo characteristicInfo=d.getInfo();
+                characteristicInfo.setY(y_pos+d.getInfo().getY());
+                info.add(characteristicInfo);
+            }
+        }
+    }
+
+    public List<CharacteristicsInfo> getInfoList(int y_pos) {
+        createInfoList(y_pos);
+        return info;
+    }
+
 }

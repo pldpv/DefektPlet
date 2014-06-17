@@ -7,15 +7,15 @@ package ua.gov.pv.defektplet.drawing;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
-import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import ua.gov.pv.defektplet.entity.Direction;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
+import ua.gov.pv.defektplet.util.GraphicsContent;
 
 /**
  *
@@ -27,7 +27,6 @@ public class DrawRailway {
     private final Integer numberOfItems = 10;
     private final Integer scale;
     private final Integer CACHE_SIZE = 50;
-
     private final Integer imageWidth = 1000;
     private int minIndex, maxIndex, currentIndex;
     private final CacheRailway cacheRailway;
@@ -62,7 +61,7 @@ public class DrawRailway {
             if (cacheRailway.isCacheble(i)) {
                 DrawRailwayItem drawItem = createRItemByIndex(i);
                 drawItem.draw();
-                cacheRailway.put(i, drawItem.getImage());
+                cacheRailway.put(i, new GraphicsContent(drawItem.getImage(),drawItem.getRItemInfoList()));
             }
         }
     }
@@ -84,10 +83,9 @@ public class DrawRailway {
                     if (cacheRailway.isCacheble(cacheIndex)) {
                         DrawRailwayItem drawItem = createRItemByIndex(cacheIndex);
                         drawItem.draw();
-                        cacheRailway.put(cacheIndex, drawItem.getImage());
-
+                        cacheRailway.put(cacheIndex,
+                                new GraphicsContent(drawItem.getImage(),drawItem.getRItemInfoList()));
                     }
-                    draw();
                 }
                 return null;
             }
@@ -106,10 +104,9 @@ public class DrawRailway {
                     if (cacheRailway.isCacheble(cacheIndex)) {
                         DrawRailwayItem drawItem = createRItemByIndex(cacheIndex);
                         drawItem.draw();
-                        cacheRailway.put(cacheIndex, drawItem.getImage());
-
+                        cacheRailway.put(cacheIndex, 
+                                new GraphicsContent(drawItem.getImage(),drawItem.getRItemInfoList()));
                     }
-                    draw();
                 }
                 return null;
             }
@@ -142,7 +139,7 @@ public class DrawRailway {
     }
 
     public void draw() {
-        int imgHeight = cacheRailway.get(currentIndex).getHeight() + gc.HEIGHT;
+        int imgHeight = cacheRailway.get(currentIndex).getbImage().getHeight() + gc.HEIGHT;
         bImage = new BufferedImage(imageWidth, imgHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
@@ -150,15 +147,29 @@ public class DrawRailway {
         g.drawImage(drawRank(), 0, 0, null);
         for (int i = currentIndex, count = 0; i < currentIndex + numberOfItems; i++, count++) {
             if (cacheRailway.containsKey(i)) {
-                g.drawImage(cacheRailway.get(i),
+                g.drawImage(cacheRailway.get(i).getbImage(),
                         imageWidth / numberOfItems * count, gc.HEIGHT, null);
             }
         }
-     
+
         g.dispose();
-
     }
-
+    
+    private List<CharacteristicsInfo> getInfo() {
+        List<CharacteristicsInfo> infoList = new ArrayList<CharacteristicsInfo>();
+        for (int i = currentIndex, count = 0; i < currentIndex + numberOfItems; i++, count++) {
+            if (cacheRailway.containsKey(i)) {
+                 for(CharacteristicsInfo info:cacheRailway.get(i).getList()){
+                     infoList.add(info.setX(info.getX()+count*gc.IMG_WIDTH));
+                 }
+            }
+        }
+        return infoList;
+    }
+    public GraphicsContent<BufferedImage,List<CharacteristicsInfo>> getGraphicsContent(){
+        draw();
+        return new GraphicsContent(bImage,getInfo());
+    }
     private BufferedImage drawRank() {
         int kmS = (ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) / 1000;
         int mS = Math.abs(ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) % 1000;

@@ -11,55 +11,56 @@ package ua.gov.pv.defektplet.helper;
  */
 public class CharacteristicsInfo {
 
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
-    public long getX() {
+    public int getX() {
         return x;
     }
 
-    public void setX(long x) {
-        this.x = x;
+    public CharacteristicsInfo setX(int x) {
+        return new CharacteristicsInfo(x, this.y, this.width, this.height, this.info);
     }
 
-    public long getY() {
+    public int getY() {
         return y;
     }
 
-    public void setY(long y) {
+    public void setY(int y) {
         this.y = y;
     }
 
-    public StringBuffer getInfo() {
-        return info;
-    }
-
-    public void setInfo(StringBuffer info) {
-        this.info = info;
-    }
-    private long x, y,width,height;
-
-    public long getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(long width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public long getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(long height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public CharacteristicsInfo(long x, long y, long width, long height, StringBuffer info) {
+    public CharacteristicsInfo(int x, int y, int width, int height, String info) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.info = info;
     }
-    private StringBuffer info;
+    private final int x;
+    private int y, width, height;
+
+    private String info;
+
+    public String getInfo() {
+        return info;
+    }
 
 }

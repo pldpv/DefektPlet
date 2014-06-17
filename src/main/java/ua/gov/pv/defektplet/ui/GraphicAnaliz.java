@@ -57,11 +57,12 @@ public class GraphicAnaliz extends JPanel {
                         choosePanel.getScale() * 1000, choosePanel.drawCheckBox);
                 drawRailway.cacheRItem();
                 iterator = drawRailway.iterator();
-                drawRailway.draw();
                 if (ip != null) {
-                    remove(ip);
+                    ip.setGraphicsContent(drawRailway.getGraphicsContent());
+                    ip.reDraw();
                 }
-                ip = new ImagePanel(drawRailway.getImage());
+                ip = new ImagePanel(drawRailway.getGraphicsContent());
+                ip.paint();
                 ip.setVisible(true);
                 c.weightx = 0.0;
                 c.ipady = drawRailway.getImage().getHeight();
@@ -72,7 +73,6 @@ public class GraphicAnaliz extends JPanel {
                 nav.setVisible(true);
                 revalidate();
                 repaint();
-
             }
 
         });
@@ -82,7 +82,8 @@ public class GraphicAnaliz extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (iterator.hasNext()) {
                     iterator.next();
-                    ip.setBImage(drawRailway.getImage());
+                    ip.setGraphicsContent(drawRailway.getGraphicsContent());
+                    ip.reDraw();
                     revalidate();
                     repaint();
                     nav.previous.setEnabled(true);
@@ -98,7 +99,8 @@ public class GraphicAnaliz extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (iterator.hasPrevious()) {
                     iterator.previous();
-                    ip.setBImage(drawRailway.getImage());
+                    ip.setGraphicsContent(drawRailway.getGraphicsContent());
+                    ip.reDraw();
                     revalidate();
                     repaint();
                     nav.next.setEnabled(true);
