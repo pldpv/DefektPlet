@@ -11,6 +11,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.GovernedVelocity;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -89,5 +90,10 @@ public class DrawGovernedVelocity implements Drawable {
         } else {
             return Color.black;
         }
+    }
+
+    @Override
+    public CharacteristicsInfo getInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

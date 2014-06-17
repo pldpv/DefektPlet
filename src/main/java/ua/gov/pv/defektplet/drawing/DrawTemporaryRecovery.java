@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import ua.gov.pv.defektplet.entity.TemporaryRecovery;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -53,6 +54,11 @@ public class DrawTemporaryRecovery implements Drawable {
     private int getWidth() {
         return (int) tr.getTrLength()
                 * gc.IMG_WIDTH / gc.SCALE;
+    }
+
+    @Override
+    public CharacteristicsInfo getInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

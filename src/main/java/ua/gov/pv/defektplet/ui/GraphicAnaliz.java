@@ -58,15 +58,14 @@ public class GraphicAnaliz extends JPanel {
                 drawRailway.cacheRItem();
                 iterator = drawRailway.iterator();
                 drawRailway.draw();
-                if (ip == null) {
-                    ip = new ImagePanel(drawRailway.getImage());
-                } else {
-                    ip.setBImage(drawRailway.getImage());
+                if (ip != null) {
+                    remove(ip);
                 }
+                ip = new ImagePanel(drawRailway.getImage());
                 ip.setVisible(true);
                 c.weightx = 0.0;
                 c.ipady = drawRailway.getImage().getHeight();
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.HORIZONTAL&GridBagConstraints.VERTICAL;
                 c.gridy = 1;
                 c.weighty = 1;
                 add(ip, c);

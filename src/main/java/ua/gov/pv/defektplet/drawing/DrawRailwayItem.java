@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
 
 
 /**
@@ -31,11 +32,13 @@ public class DrawRailwayItem {
                 BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
         int height=0;
+        
         for (DrawableList dl:drawableList){
             dl.draw();
             g.drawImage(dl.getbImage(), 0, height, null);
             height+=dl.getbImage().getHeight();
         }
+     
         g.dispose();
         
     }

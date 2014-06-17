@@ -10,7 +10,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 import ua.gov.pv.defektplet.drawing.Drawable;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 
 /**
  *
@@ -31,10 +33,12 @@ public class DrawableList<T extends Drawable> extends ArrayList<Drawable> {
         g2.fillRect(0, 0, bImage.getWidth(),bImage.getHeight());
         for (Drawable d : this) {
             d.draw(g2);
+            
         }
     }
 
     public BufferedImage getbImage(){
         return bImage;
     }
+    
 }

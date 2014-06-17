@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.RailsStrings;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -59,5 +60,10 @@ public class DrawRailsString implements Drawable {
         } else {
             return gc.IMG_WIDTH + gc.LEGEND_WIDTH;
         }
+    }
+
+    @Override
+    public CharacteristicsInfo getInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

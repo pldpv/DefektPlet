@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.Deviation;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -53,6 +54,11 @@ public class DrawDeviation implements Drawable {
 
     private int getX() {
         return ((deviation.getKm() - ii.getKmS()) * 1000 + deviation.getM() - ii.getmS()) * gc.IMG_WIDTH / gc.SCALE;
+    }
+
+    @Override
+    public CharacteristicsInfo getInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -53,12 +54,17 @@ public class DrawRank implements Drawable {
 
     private String getPk(int m) {
         String str;
-        str = (meterToPK(m) == 10||meterToPK(m) == 0) ? String.valueOf(1+(ii.getKmS() * 1000 + m) / 1000)+"км"
+        str = (meterToPK(m) == 10||meterToPK(m) == 0) ? String.valueOf((ii.getKmS() * 1000 + m) / 1000)+"км"
                 : meterToPK(m-1) + "/" + (meterToPK(m));
         return str;
     }
 
     private int meterToPK(int m) {
         return m / 100 % 10;
+    }
+
+    @Override
+    public CharacteristicsInfo getInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

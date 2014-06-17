@@ -43,9 +43,8 @@ public class DrawRailway {
         this.cb = cb;
         this.ii = ii;
         this.scale = scale / numberOfItems;
-         this.direction = new DefectStringsDataSource(ii).
-                  getDirectionByNameLine();
-       
+        this.direction = new DefectStringsDataSource(ii).
+                getDirectionByNameLine();
 
         minIndex = -(ii.getKmS() * 1000 + ii.getmS() - getDirectionStart(direction) + 1)
                 / this.scale;
@@ -143,33 +142,36 @@ public class DrawRailway {
     }
 
     public void draw() {
-        int imgHeight = cacheRailway.get(currentIndex).getHeight()+gc.HEIGHT;
+        int imgHeight = cacheRailway.get(currentIndex).getHeight() + gc.HEIGHT;
         bImage = new BufferedImage(imageWidth, imgHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
-        
-        g.drawImage(drawRank() , 0, 0, null);
+
+        g.drawImage(drawRank(), 0, 0, null);
         for (int i = currentIndex, count = 0; i < currentIndex + numberOfItems; i++, count++) {
             if (cacheRailway.containsKey(i)) {
                 g.drawImage(cacheRailway.get(i),
                         imageWidth / numberOfItems * count, gc.HEIGHT, null);
             }
         }
+     
         g.dispose();
 
     }
-    private BufferedImage drawRank(){
+
+    private BufferedImage drawRank() {
         int kmS = (ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) / 1000;
-        int mS = Math.abs(ii.getKmS() * 1000 + ii.getmS() +currentIndex * scale) % 1000;
-        int kmE = (kmS * 1000 + mS + scale*numberOfItems) / 1000;
-        int mE = (mS + scale*numberOfItems) % 1000;
-        IntervalInformation iInf =new IntervalInformation(ii.getDirection(), kmS, mS, kmE, mE, ii.getLine(), null);
-        GraphicsCharacteristics gcR = new GraphicsCharacteristics(imageWidth, 0, gc.HEIGHT, gc.SCALE*numberOfItems);
-        DrawRank dr= new DrawRank(iInf, gcR);
-        BufferedImage bImageRank= new BufferedImage(imageWidth, gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        int mS = Math.abs(ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) % 1000;
+        int kmE = (kmS * 1000 + mS + scale * numberOfItems) / 1000;
+        int mE = (mS + scale * numberOfItems) % 1000;
+        IntervalInformation iInf = new IntervalInformation(ii.getDirection(), kmS, mS, kmE, mE, ii.getLine(), null);
+        GraphicsCharacteristics gcR = new GraphicsCharacteristics(imageWidth, 0, gc.HEIGHT, gc.SCALE * numberOfItems);
+        DrawRank dr = new DrawRank(iInf, gcR);
+        BufferedImage bImageRank = new BufferedImage(imageWidth, gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
         dr.draw(bImageRank.createGraphics());
         return bImageRank;
     }
+
     public BufferedImage getImage() {
         return bImage;
     }
@@ -187,11 +189,13 @@ public class DrawRailway {
     }
 
     private int getDirectionStart(Direction d) {
-        return d.getKmS() * 1000 + d.getmS();
+        return 1001;
+        //return d.getKmS() * 1000 + d.getmS();
     }
 
     private int getDirectionEnd(Direction d) {
-        return d.getKmE() * 1000 + d.getmE();
+        return 338100;
+//return d.getKmE() * 1000 + d.getmE();
     }
 
 }

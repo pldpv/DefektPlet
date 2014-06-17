@@ -3,30 +3,33 @@ package ua.gov.pv.defektplet.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
 import javax.swing.JPanel;
+
 
 public class ImagePanel extends JPanel{
     
-    private BufferedImage image;
-    BufferedImage result;
-    Dimension d;
+    private BufferedImage image,result;
+    private Dimension d;
+    
+    
     public ImagePanel(BufferedImage bImage){
         this.image=bImage;
         int imgWidth=Someclass.screenSize.width-100;
         int imgHeight=bImage.getHeight()*imgWidth/image.getWidth();
         result =new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
-        setSize(new Dimension(result.getWidth(), result.getHeight()));
+        setPreferredSize(new Dimension(result.getWidth(), result.getHeight()));
         paintComponent(result.createGraphics());
-        try {
-            ImageIO.write(bImage, "PNG", new File("c:\\result.PNG"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        //This is tEST panel
+        Panel panel = new Panel("dfjghk");
+        panel.requestFocusInWindow();
+        panel.setBounds(10, 10, 100, 100);
+        add(panel);
     }
     public void setBImage(BufferedImage image){
         this.image=image;

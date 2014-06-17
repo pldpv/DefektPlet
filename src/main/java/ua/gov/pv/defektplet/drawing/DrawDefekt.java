@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.RailsDefect;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -21,12 +22,21 @@ public class DrawDefekt implements Drawable {
     private final RailsDefect rd;
     private final int penWidth;
     private final GraphicsCharacteristics gc;
+    private CharacteristicsInfo info;
 
+    public CharacteristicsInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(CharacteristicsInfo info) {
+        this.info = info;
+    }
     public DrawDefekt(RailsDefect rd, GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.rd = rd;
         this.gc = gh;
         penWidth = gh.IMG_WIDTH / gh.SCALE;
+        info=new CharacteristicsInfo(getX(), 0, penWidth, gc.HEIGHT, info());
     }
 
     @Override
@@ -40,5 +50,13 @@ public class DrawDefekt implements Drawable {
         return gc.LEGEND_WIDTH + ((rd.getKm() - ii.getKmS()) * 1000 + rd.getM() - ii.getmS())
                 * gc.IMG_WIDTH / gc.SCALE;
     }
-
+    private StringBuffer info(){
+        StringBuffer result=new StringBuffer();
+        result.append("Код: "+rd.getDefectCode()+"\n");
+        result.append("Длина: "+rd.getDefectLength()+"\n");
+        result.append("Глубина: "+rd.getDefectHeight()+"\n");
+        result.append("Ширина: "+rd.getDefectWidth()+"\n");
+        result.append("Дата: "+rd.getDateOfFounding());
+        return result;
+    }
 }

@@ -1,6 +1,7 @@
 package ua.gov.pv.defektplet.drawing;
 
 import java.awt.Graphics;
+import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 
 
 /**
@@ -9,4 +10,5 @@ import java.awt.Graphics;
  */
 public interface Drawable {
     public void draw(Graphics g);
+    public CharacteristicsInfo getInfo();
 }
