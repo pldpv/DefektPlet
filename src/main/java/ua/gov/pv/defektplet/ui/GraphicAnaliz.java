@@ -58,7 +58,8 @@ public class GraphicAnaliz extends JPanel {
                 drawRailway.cacheRItem();
                 iterator = drawRailway.iterator();
                 if (ip != null) {
-                    ip.setGraphicsContent(drawRailway.getGraphicsContent());
+                    remove(ip);
+                    ip = new ImagePanel(drawRailway.getGraphicsContent());
                     ip.reDraw();
                 }
                 ip = new ImagePanel(drawRailway.getGraphicsContent());

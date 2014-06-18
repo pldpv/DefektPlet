@@ -23,12 +23,14 @@ public class DrawTemporaryRecovery implements Drawable {
     private IntervalInformation ii;
     private final TemporaryRecovery tr;
     private final GraphicsCharacteristics gc;
+    private CharacteristicsInfo info;
 
     public DrawTemporaryRecovery(TemporaryRecovery tr,
             GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.tr = tr;
         this.gc = gh;
+        info = new CharacteristicsInfo(getX(), gc.HEIGHT, getWidth(), gc.HEIGHT, info());
 
     }
 
@@ -58,7 +60,14 @@ public class DrawTemporaryRecovery implements Drawable {
 
     @Override
     public CharacteristicsInfo getInfo() {
-        return null;
+        return info;
     }
 
+    private String info() {
+        String eol = System.getProperty("line.separator");
+        String result = new String(
+                 "Длина: " + tr.getTrLength() + eol
+                + "Дата: " + tr.getDateOfChange());
+        return result;
+    }
 }

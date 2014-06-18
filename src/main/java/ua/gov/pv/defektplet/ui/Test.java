@@ -19,7 +19,7 @@ public class Test extends JFrame{
      public static void main(String ... args) {
         Test t=new Test();
         t.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Panel panel = new Panel("dfjghk");
+        PopUpInfo1 panel = new PopUpInfo1("dfjghk");
         panel.requestFocusInWindow();
         panel.setBounds(500, 500, 100, 100);
         panel.setLocation(200, 200);
