@@ -7,9 +7,12 @@ package ua.gov.pv.defektplet.drawing;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import ua.gov.pv.defektplet.entity.Direction;
 import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
@@ -151,7 +154,7 @@ public class DrawRailway {
                         imageWidth / numberOfItems * count, gc.HEIGHT, null);
             }
         }
-
+       
         g.dispose();
     }
     

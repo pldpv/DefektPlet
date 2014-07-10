@@ -1,13 +1,20 @@
 package ua.gov.pv.defektplet.ui;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -36,10 +43,17 @@ public class ImagePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(content.getbImage(), 0, 0, result.getWidth(), result.getHeight(), null);
+        Graphics2D g2= (Graphics2D)g;
+        g2.setComposite(AlphaComposite.Src);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.drawImage(content.getbImage(), 0, 0, result.getWidth(), result.getHeight(), null);
+        
     }
 
     public void paint() {
+
         if (result != null) {
             paintComponent(result.createGraphics());
         }
@@ -88,7 +102,7 @@ public class ImagePanel extends JPanel {
                 public void mouseEntered(final MouseEvent e) {
                     System.out.println(e);
                     textArea.setVisible(true);
-                    
+
                 }
 
                 @Override

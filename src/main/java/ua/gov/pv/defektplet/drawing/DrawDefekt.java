@@ -32,7 +32,7 @@ public class DrawDefekt implements Drawable {
         this.ii = ii;
         this.rd = rd;
         this.gc = gh;
-        penWidth = gh.IMG_WIDTH / gh.SCALE;
+        penWidth = 2;//gh.IMG_WIDTH / gh.SCALE;
         info = new CharacteristicsInfo(getX(),gc.HEIGHT , penWidth, gc.HEIGHT, info());
     }
 

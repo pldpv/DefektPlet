@@ -6,19 +6,12 @@
 package ua.gov.pv.defektplet.ui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.Rectangle2D;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import javax.swing.event.MouseInputAdapter;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 
 /**
  *

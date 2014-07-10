@@ -20,7 +20,7 @@ import ua.gov.pv.defektplet.util.GraphicsContent;
 public class CacheRailway extends HashMap<Integer, GraphicsContent<BufferedImage,List<? extends CharacteristicsInfo>>> {
 
     private final int MAX_SIZE;
-    private int minIndex, maxIndex;
+    private final int minIndex, maxIndex;
 
     public CacheRailway(int MAX_SIZE, int minIndex, int maxIndex) {
         this.MAX_SIZE = MAX_SIZE;

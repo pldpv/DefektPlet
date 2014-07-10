@@ -32,7 +32,7 @@ public class DrawRank implements Drawable {
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setFont(gc.font);
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.GRAY);
         g2.fillRect(0, 0, gc.IMG_WIDTH + gc.LEGEND_WIDTH, gc.HEIGHT);
         g2.setColor(Color.BLACK);
         g2.drawLine(gc.LEGEND_WIDTH, gc.HEIGHT - 1, gc.LEGEND_WIDTH + gc.IMG_WIDTH,
