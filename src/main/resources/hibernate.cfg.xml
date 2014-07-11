@@ -9,11 +9,15 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">pld1</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping class="ua.gov.pv.defektplet.entity.RailsDefect"/>
-    <mapping class="ua.gov.pv.defektplet.entity.RailsStrings"/>
-    <mapping class="ua.gov.pv.defektplet.entity.TemporaryRecovery"/>
     <mapping class="ua.gov.pv.defektplet.entity.Deviation"/>
     <mapping class="ua.gov.pv.defektplet.entity.Direction"/>
+    <mapping class="ua.gov.pv.defektplet.entity.FirmDirection"/>
     <mapping class="ua.gov.pv.defektplet.entity.GovernedVelocity"/>
+    <mapping class="ua.gov.pv.defektplet.entity.RailsDefect"/>
+    <mapping class="ua.gov.pv.defektplet.entity.RailsStrings"/>
+    <mapping class="ua.gov.pv.defektplet.entity.Railway"/>
+    <mapping class="ua.gov.pv.defektplet.entity.RailwayDirection"/>
+    <mapping class="ua.gov.pv.defektplet.entity.RailwayFirm"/>
+    <mapping class="ua.gov.pv.defektplet.entity.TemporaryRecovery"/>
   </session-factory>
 </hibernate-configuration>

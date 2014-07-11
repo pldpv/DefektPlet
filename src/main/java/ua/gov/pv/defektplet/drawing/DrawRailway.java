@@ -7,15 +7,12 @@ package ua.gov.pv.defektplet.drawing;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import ua.gov.pv.defektplet.entity.Direction;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 import ua.gov.pv.defektplet.util.GraphicsContent;
@@ -35,9 +32,7 @@ public class DrawRailway {
     private final CacheRailway cacheRailway;
     private final IntervalInformation ii;
     private static GraphicsCharacteristics gc;
-
     JCheckBox[] cb;
-
     private final Direction direction;
 
     public DrawRailway(IntervalInformation ii, Integer scale,
@@ -45,8 +40,7 @@ public class DrawRailway {
         this.cb = cb;
         this.ii = ii;
         this.scale = scale / numberOfItems;
-        this.direction = new DefectStringsDataSource(ii).
-                getDirectionByNameLine();
+        this.direction = new DefectStringsDataSource(ii).getDirectionByNameLine();
 
         minIndex = -(ii.getKmS() * 1000 + ii.getmS() - getDirectionStart(direction) + 1)
                 / this.scale;
@@ -64,7 +58,7 @@ public class DrawRailway {
             if (cacheRailway.isCacheble(i)) {
                 DrawRailwayItem drawItem = createRItemByIndex(i);
                 drawItem.draw();
-                cacheRailway.put(i, new GraphicsContent(drawItem.getImage(),drawItem.getRItemInfoList()));
+                cacheRailway.put(i, new GraphicsContent(drawItem.getImage(), drawItem.getRItemInfoList()));
             }
         }
     }
@@ -87,7 +81,7 @@ public class DrawRailway {
                         DrawRailwayItem drawItem = createRItemByIndex(cacheIndex);
                         drawItem.draw();
                         cacheRailway.put(cacheIndex,
-                                new GraphicsContent(drawItem.getImage(),drawItem.getRItemInfoList()));
+                                new GraphicsContent(drawItem.getImage(), drawItem.getRItemInfoList()));
                     }
                 }
                 return null;
@@ -107,8 +101,8 @@ public class DrawRailway {
                     if (cacheRailway.isCacheble(cacheIndex)) {
                         DrawRailwayItem drawItem = createRItemByIndex(cacheIndex);
                         drawItem.draw();
-                        cacheRailway.put(cacheIndex, 
-                                new GraphicsContent(drawItem.getImage(),drawItem.getRItemInfoList()));
+                        cacheRailway.put(cacheIndex,
+                                new GraphicsContent(drawItem.getImage(), drawItem.getRItemInfoList()));
                     }
                 }
                 return null;
@@ -154,25 +148,27 @@ public class DrawRailway {
                         imageWidth / numberOfItems * count, gc.HEIGHT, null);
             }
         }
-       
+
         g.dispose();
     }
-    
-    private List<CharacteristicsInfo> getInfo() {
-        List<CharacteristicsInfo> infoList = new ArrayList<CharacteristicsInfo>();
+
+    private List<DrawableInfo> getInfo() {
+        List<DrawableInfo> infoList = new ArrayList<DrawableInfo>();
         for (int i = currentIndex, count = 0; i < currentIndex + numberOfItems; i++, count++) {
             if (cacheRailway.containsKey(i)) {
-                 for(CharacteristicsInfo info:cacheRailway.get(i).getList()){
-                     infoList.add(info.setX(info.getX()+count*gc.IMG_WIDTH));
-                 }
+                for (DrawableInfo info : cacheRailway.get(i).getList()) {
+                    infoList.add(info.setX(info.getX() + count * gc.IMG_WIDTH));
+                }
             }
         }
         return infoList;
     }
-    public GraphicsContent<BufferedImage,List<CharacteristicsInfo>> getGraphicsContent(){
+
+    public GraphicsContent getGraphicsContent() {
         draw();
-        return new GraphicsContent(bImage,getInfo());
+        return new GraphicsContent(bImage, getInfo());
     }
+
     private BufferedImage drawRank() {
         int kmS = (ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) / 1000;
         int mS = Math.abs(ii.getKmS() * 1000 + ii.getmS() + currentIndex * scale) % 1000;
@@ -203,13 +199,12 @@ public class DrawRailway {
     }
 
     private int getDirectionStart(Direction d) {
-        return 1001;
-        //return d.getKmS() * 1000 + d.getmS();
+
+        return d.getKmS() * 1000 + d.getmS();
     }
 
     private int getDirectionEnd(Direction d) {
-        return 338100;
-//return d.getKmE() * 1000 + d.getmE();
-    }
 
+        return d.getKmE() * 1000 + d.getmE();
+    }
 }

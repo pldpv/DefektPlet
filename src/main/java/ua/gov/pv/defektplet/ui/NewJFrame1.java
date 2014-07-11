@@ -6,8 +6,6 @@
 
 package ua.gov.pv.defektplet.ui;
 
-import ua.gov.pv.defektplet.helper.IntervalInformation;
-
 /**
  *
  * @author ПГМ

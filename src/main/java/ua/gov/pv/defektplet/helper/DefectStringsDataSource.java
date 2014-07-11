@@ -10,12 +10,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import ua.gov.pv.defektplet.entity.Deviation;
-import ua.gov.pv.defektplet.entity.Direction;
-import ua.gov.pv.defektplet.entity.GovernedVelocity;
-import ua.gov.pv.defektplet.entity.RailsDefect;
-import ua.gov.pv.defektplet.entity.RailsStrings;
-import ua.gov.pv.defektplet.entity.TemporaryRecovery;
+import ua.gov.pv.defektplet.entity.*;
 import ua.gov.pv.defektplet.util.HibernateUtil;
 
 /**

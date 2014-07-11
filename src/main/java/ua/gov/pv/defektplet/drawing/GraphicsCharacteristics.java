@@ -6,7 +6,6 @@
 package ua.gov.pv.defektplet.drawing;
 
 import java.awt.Font;
-import java.awt.Graphics2D;
 
 /**
  *

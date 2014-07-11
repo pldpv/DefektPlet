@@ -8,8 +8,6 @@ package ua.gov.pv.defektplet.importExport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING;

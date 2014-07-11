@@ -18,11 +18,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class Direction implements Serializable {
-    @Id
+   @Id
     @GeneratedValue
     private Integer id;
     @Column
-    private String direction;
+    private Integer idDirection;
+    private String nameDirection;
     private Integer line;
     private Integer kmS;
     private Integer mS;
@@ -35,14 +36,6 @@ public class Direction implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
     }
 
     public Integer getLine() {
@@ -83,5 +76,33 @@ public class Direction implements Serializable {
 
     public void setmE(Integer mE) {
         this.mE = mE;
+    }
+
+    /**
+     * @return the idDirection
+     */
+    public Integer getIdDirection() {
+        return idDirection;
+    }
+
+    /**
+     * @param idDirection the idDirection to set
+     */
+    public void setIdDirection(Integer idDirection) {
+        this.idDirection = idDirection;
+    }
+
+    /**
+     * @return the nameDirection
+     */
+    public String getNameDirection() {
+        return nameDirection;
+    }
+
+    /**
+     * @param nameDirection the nameDirection to set
+     */
+    public void setNameDirection(String nameDirection) {
+        this.nameDirection = nameDirection;
     }
 }

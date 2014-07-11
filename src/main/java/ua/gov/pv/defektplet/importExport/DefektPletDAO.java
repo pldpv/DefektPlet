@@ -5,7 +5,6 @@
  */
 package ua.gov.pv.defektplet.importExport;
 
-import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.HibernateException;
 

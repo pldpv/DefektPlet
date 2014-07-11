@@ -1,30 +1,45 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * An Object which contains list of information about drawable and painted
+ * image of this drawable.
  */
-
 package ua.gov.pv.defektplet.util;
+
+import java.awt.image.BufferedImage;
+import java.util.List;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 
 /**
  *
- * @author Евген
-
+ * @author Tkachuk Evgen
+ * @see DrawableInfo
+ *
  */
-public class GraphicsContent<I,L> {
-        private L list;
-        private I bImage;
-
-    public L getList() {
-        return list;
+public class GraphicsContent {
+    
+    private List<? extends DrawableInfo> drawableInfo;
+    private BufferedImage bImage;
+    
+    /**
+     * @return List of information about drawable object(s)
+     * @see DrawableInfo
+     */
+    public List<? extends DrawableInfo> getList() {
+        return drawableInfo;
     }
-
-    public I getbImage() {
+    /**
+     * @return painted image of drawable object(s)
+     */
+    public BufferedImage getbImage() {
         return bImage;
     }
-
-    public GraphicsContent(I bImage,L list) {
-        this.list = list;
+    /**
+     * Constructs a new GraphicsContent with the specified BufferedImage 
+     * and DrawableInfo
+     * @param bImage  BufferedImage
+     * @param drawableInfo drawable information
+     */
+    public GraphicsContent(BufferedImage bImage, List<? extends DrawableInfo> drawableInfo) {
+        this.drawableInfo = drawableInfo;
         this.bImage = bImage;
     }
 }

@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -64,7 +64,7 @@ public class DrawRank implements Drawable {
     }
 
     @Override
-    public CharacteristicsInfo getInfo() {
+    public DrawableInfo getInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -6,12 +6,11 @@
 package ua.gov.pv.defektplet.drawing;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.GovernedVelocity;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -93,7 +92,7 @@ public class DrawGovernedVelocity implements Drawable {
     }
 
     @Override
-    public CharacteristicsInfo getInfo() {
+    public DrawableInfo getInfo() {
         return null;
     }
 }

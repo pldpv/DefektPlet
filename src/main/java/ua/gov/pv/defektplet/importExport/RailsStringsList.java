@@ -5,8 +5,6 @@
  */
 package ua.gov.pv.defektplet.importExport;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;

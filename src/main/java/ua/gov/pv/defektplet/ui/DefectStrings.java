@@ -24,7 +24,6 @@ import ua.gov.pv.defektplet.util.HibernateUtil;
  */
 public class DefectStrings extends javax.swing.JFrame {
 
-    private String fileNameWithOutExt;
 
     /**
      * Creates new form DefectStrings
@@ -130,7 +129,6 @@ public class DefectStrings extends javax.swing.JFrame {
             if (chooseDirectory.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 System.out.println("getCurrentDirectory(): " + chooseDirectory.getCurrentDirectory());
                 System.out.println("getSelectedFile() : " + chooseDirectory.getSelectedFile());
-                fileNameWithOutExt = FilenameUtils.removeExtension(chooseDirectory.getSelectedFile().getName()).toLowerCase();
             } 
             Import i = new Import(chooseDirectory.getSelectedFile());
             i.importDB(new DefektPletDAO());

@@ -5,13 +5,9 @@
  */
 package ua.gov.pv.defektplet.drawing;
 
-import java.awt.Color;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import ua.gov.pv.defektplet.entity.TemporaryRecovery;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -23,14 +19,14 @@ public class DrawTemporaryRecovery implements Drawable {
     private IntervalInformation ii;
     private final TemporaryRecovery tr;
     private final GraphicsCharacteristics gc;
-    private CharacteristicsInfo info;
+    private DrawableInfo info;
 
     public DrawTemporaryRecovery(TemporaryRecovery tr,
             GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.tr = tr;
         this.gc = gh;
-        info = new CharacteristicsInfo(getX(), gc.HEIGHT, getWidth(), gc.HEIGHT, info());
+        info = new DrawableInfo(getX(), gc.HEIGHT, getWidth(), gc.HEIGHT, info());
 
     }
 
@@ -59,7 +55,7 @@ public class DrawTemporaryRecovery implements Drawable {
     }
 
     @Override
-    public CharacteristicsInfo getInfo() {
+    public DrawableInfo getInfo() {
         return info;
     }
 

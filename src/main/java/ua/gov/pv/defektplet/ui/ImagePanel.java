@@ -1,35 +1,22 @@
 package ua.gov.pv.defektplet.ui;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
 import javax.swing.event.MouseInputAdapter;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.util.GraphicsContent;
 
 public class ImagePanel extends JPanel {
 
     private BufferedImage result;
     private float offset;
-    private GraphicsContent<BufferedImage, List<CharacteristicsInfo>> content;
+    private GraphicsContent content;
 
-    public ImagePanel(GraphicsContent<BufferedImage, List<CharacteristicsInfo>> content) {
+    public ImagePanel(GraphicsContent content) {
         setLayout(null);
         requestFocusInWindow();
         this.content = content;
@@ -68,7 +55,7 @@ public class ImagePanel extends JPanel {
     }
 
     private void drawPopUp() {
-        for (CharacteristicsInfo info : content.getList()) {
+        for (DrawableInfo info : content.getList()) {
             float x_pos, y_pos;
             x_pos = y_pos = offset;
             x_pos *= info.getX();
@@ -81,7 +68,7 @@ public class ImagePanel extends JPanel {
         }
     }
 
-    public void setGraphicsContent(GraphicsContent<BufferedImage, List<CharacteristicsInfo>> graphicsContent) {
+    public void setGraphicsContent(GraphicsContent graphicsContent) {
         content = graphicsContent;
     }
 

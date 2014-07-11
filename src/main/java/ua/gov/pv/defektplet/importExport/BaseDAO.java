@@ -5,10 +5,6 @@
  */
 package ua.gov.pv.defektplet.importExport;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import ua.gov.pv.defektplet.util.HibernateUtil;
 

@@ -7,12 +7,9 @@ package ua.gov.pv.defektplet.ui;
 
 import java.awt.Component;
 import java.awt.PopupMenu;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import ua.gov.pv.defektplet.drawing.DrawRailway;
-import ua.gov.pv.defektplet.ui.ImagePanel;
 
 /**
  *
@@ -33,15 +30,4 @@ public class Navigation extends JPanel {
         add(previous);
         add(next);
     }
-
-    @Override
-    public Component add(Component comp) {
-        return super.add(comp); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void add(PopupMenu popup) {
-        super.add(popup); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

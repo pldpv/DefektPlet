@@ -5,11 +5,7 @@
  */
 package ua.gov.pv.defektplet.drawing;
 
-import ua.gov.pv.defektplet.entity.Deviation;
-import ua.gov.pv.defektplet.entity.GovernedVelocity;
-import ua.gov.pv.defektplet.entity.RailsDefect;
-import ua.gov.pv.defektplet.entity.RailsStrings;
-import ua.gov.pv.defektplet.entity.TemporaryRecovery;
+import ua.gov.pv.defektplet.entity.*;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**

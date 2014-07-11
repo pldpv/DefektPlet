@@ -6,7 +6,6 @@
 
 package ua.gov.pv.defektplet.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import ua.gov.pv.defektplet.drawing.DrawableFactory;
 import ua.gov.pv.defektplet.drawing.GraphicsCharacteristics;

@@ -1,27 +1,33 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Caches railway objects
  */
 package ua.gov.pv.defektplet.drawing;
 
-import java.awt.image.BufferedImage;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
 import ua.gov.pv.defektplet.util.GraphicsContent;
 
 /**
- *
+ * 
  * @author Евген
  */
-public class CacheRailway extends HashMap<Integer, GraphicsContent<BufferedImage,List<? extends CharacteristicsInfo>>> {
-
+public class CacheRailway extends HashMap<Integer, GraphicsContent> {
+    /**
+     * maximum size of cache
+     */
     private final int MAX_SIZE;
+    /**
+     * min and max indexes of RailwayItem
+     */
     private final int minIndex, maxIndex;
-
+    /**
+     * Constructs empty CacheRailway with specified max size, min, max index 
+     * of RailwayItem
+     * @param MAX_SIZE
+     * @param minIndex
+     * @param maxIndex 
+     */
     public CacheRailway(int MAX_SIZE, int minIndex, int maxIndex) {
         this.MAX_SIZE = MAX_SIZE;
         this.minIndex = minIndex;

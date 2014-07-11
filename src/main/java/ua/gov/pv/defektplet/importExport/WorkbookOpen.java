@@ -21,12 +21,10 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class WorkbookOpen {
 
     private final File file;
-    private final String fileName;
     private Workbook wb;
 
     public WorkbookOpen(File file) {
         this.file = file;
-        fileName = FilenameUtils.removeExtension(file.getName().toLowerCase());
     }
 
     public Workbook getWorkbook() throws InvalidFormatException {

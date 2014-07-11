@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.RailsDefect;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -22,9 +22,9 @@ public class DrawDefekt implements Drawable {
     private final RailsDefect rd;
     private final int penWidth;
     private final GraphicsCharacteristics gc;
-    private CharacteristicsInfo info;
+    private DrawableInfo info;
 
-    public CharacteristicsInfo getInfo() {
+    public DrawableInfo getInfo() {
         return info;
     }
 
@@ -33,7 +33,7 @@ public class DrawDefekt implements Drawable {
         this.rd = rd;
         this.gc = gh;
         penWidth = 2;//gh.IMG_WIDTH / gh.SCALE;
-        info = new CharacteristicsInfo(getX(),gc.HEIGHT , penWidth, gc.HEIGHT, info());
+        info = new DrawableInfo(getX(),gc.HEIGHT , penWidth, gc.HEIGHT, info());
     }
 
     @Override

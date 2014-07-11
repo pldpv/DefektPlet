@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import ua.gov.pv.defektplet.entity.Deviation;
-import ua.gov.pv.defektplet.helper.CharacteristicsInfo;
+import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
 
 /**
@@ -57,7 +57,7 @@ public class DrawDeviation implements Drawable {
     }
 
     @Override
-    public CharacteristicsInfo getInfo() {
+    public DrawableInfo getInfo() {
         return null;
     }
 

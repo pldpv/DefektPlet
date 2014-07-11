@@ -9,7 +9,7 @@ package ua.gov.pv.defektplet.helper;
  *
  * @author Евген
  */
-public class CharacteristicsInfo {
+public class DrawableInfo {
 
     public void setInfo(String info) {
         this.info = info;
@@ -19,8 +19,8 @@ public class CharacteristicsInfo {
         return x;
     }
 
-    public CharacteristicsInfo setX(int x) {
-        return new CharacteristicsInfo(x, this.y, this.width, this.height, this.info);
+    public DrawableInfo setX(int x) {
+        return new DrawableInfo(x, this.y, this.width, this.height, this.info);
     }
 
     public int getY() {
@@ -47,7 +47,7 @@ public class CharacteristicsInfo {
         this.height = height;
     }
 
-    public CharacteristicsInfo(int x, int y, int width, int height, String info) {
+    public DrawableInfo(int x, int y, int width, int height, String info) {
         this.x = x;
         this.y = y;
         this.width = width;
