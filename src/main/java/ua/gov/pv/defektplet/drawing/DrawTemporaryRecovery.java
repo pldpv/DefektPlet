@@ -38,14 +38,13 @@ public class DrawTemporaryRecovery implements Drawable {
         g2.setColor(Color.WHITE);
         g2.fillRect(getX(), 0, getWidth(), gc.HEIGHT - 1);
         g2.setColor(Color.BLACK);
-        g2.drawString(String.valueOf((int) tr.getTrLength()),
-                getX() + (getWidth() - fm.stringWidth(String.valueOf((int) tr.getTrLength()))) / 2, gc.HEIGHT - 1);
+//        g2.drawString(String.valueOf((int) tr.getTrLength()),
+//                getX() + (getWidth() - fm.stringWidth(String.valueOf((int) tr.getTrLength()))) / 2, gc.HEIGHT - 1);
         g2.drawRect(getX(), 0, getWidth(), gc.HEIGHT - 1);
     }
 
     private int getX() {
-        return gc.LEGEND_WIDTH
-                + ((tr.getKm() - ii.getKmS()) * 1000 + tr.getM() - ii.getmS())
+        return ((tr.getKm() - ii.getKmS()) * 1000 + tr.getM() - ii.getmS())
                 * gc.IMG_WIDTH / gc.SCALE;
     }
 

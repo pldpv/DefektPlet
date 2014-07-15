@@ -50,4 +50,25 @@ public class Railway implements Serializable{
     public Integer getIdRailway() {
         return idRailway;
     }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @param idRailway the idRailway to set
+     */
+    public void setIdRailway(Integer idRailway) {
+        this.idRailway = idRailway;
+    }
+
+    /**
+     * @param railwayName the railwayName to set
+     */
+    public void setRailwayName(String railwayName) {
+        this.railwayName = railwayName;
+    }
 }

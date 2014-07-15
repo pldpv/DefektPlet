@@ -26,7 +26,6 @@ public class DrawGovernedVelocity implements Drawable {
     public DrawGovernedVelocity(GovernedVelocity gv, GraphicsCharacteristics gh,
              IntervalInformation ii) {
         this.gv = gv;
-       
         this.ii = ii;
         this.gc = gh;
     }
@@ -45,9 +44,9 @@ public class DrawGovernedVelocity implements Drawable {
 
     private int getStartX() {
         if (gv.getKmS() * 1000 + gv.getmS() < ii.getKmS() * 1000 + ii.getmS()) {
-            return gc.LEGEND_WIDTH;
+            return 0;
         } else {
-            return gc.LEGEND_WIDTH + ((gv.getKmS() - ii.getKmS()) * 1000 + gv.getmS() - ii.getKmS())
+            return ((gv.getKmS() - ii.getKmS()) * 1000 + gv.getmS() - ii.getKmS())
                     * gc.IMG_WIDTH / gc.SCALE;
         }
     }

@@ -18,6 +18,12 @@ public class RailwayDirection implements Serializable {
     @GeneratedValue
     private Integer id;
     @Column
+    private Integer line;
+    private Integer kmS;
+    private Integer mS;
+    private Integer kmE;
+    private Integer mE;
+    
     @ManyToOne
     @JoinColumn(name = "idDirection", referencedColumnName = "idDirection")
     private Direction direction;
@@ -65,5 +71,75 @@ public class RailwayDirection implements Serializable {
      */
     public void setRailway(Railway railway) {
         this.railway = railway;
+    }
+
+    /**
+     * @return the line
+     */
+    public Integer getLine() {
+        return line;
+    }
+
+    /**
+     * @param line the line to set
+     */
+    public void setLine(Integer line) {
+        this.line = line;
+    }
+
+    /**
+     * @return the kmS
+     */
+    public Integer getKmS() {
+        return kmS;
+    }
+
+    /**
+     * @param kmS the kmS to set
+     */
+    public void setKmS(Integer kmS) {
+        this.kmS = kmS;
+    }
+
+    /**
+     * @return the mS
+     */
+    public Integer getmS() {
+        return mS;
+    }
+
+    /**
+     * @param mS the mS to set
+     */
+    public void setmS(Integer mS) {
+        this.mS = mS;
+    }
+
+    /**
+     * @return the kmE
+     */
+    public Integer getKmE() {
+        return kmE;
+    }
+
+    /**
+     * @param kmE the kmE to set
+     */
+    public void setKmE(Integer kmE) {
+        this.kmE = kmE;
+    }
+
+    /**
+     * @return the mE
+     */
+    public Integer getmE() {
+        return mE;
+    }
+
+    /**
+     * @param mE the mE to set
+     */
+    public void setmE(Integer mE) {
+        this.mE = mE;
     }
 }

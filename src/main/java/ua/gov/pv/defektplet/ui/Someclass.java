@@ -12,6 +12,9 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import org.apache.log4j.BasicConfigurator;
+import org.hibernate.Session;
+import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
+import ua.gov.pv.defektplet.util.HibernateUtil;
 
 /**
  *
@@ -30,6 +33,8 @@ public class Someclass {
     }
 
     private void initComponents() {
+        Session sess=HibernateUtil.getSessionFactory().openSession();
+        sess.close();
         final JFrame f = new JFrame();
         f.setSize(screenSize.width, screenSize.height);
         f.setJMenuBar(new DefectMenuBar(f));

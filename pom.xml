@@ -122,14 +122,13 @@
                     <showConsoleWindow>true</showConsoleWindow>
                     <binFileExtensions>
                         <unix>.sh</unix>
-                        <windows>.exe</windows>
-                    </binFileExtensions>
+                        </binFileExtensions>
                     <platforms>
                         <platform>unix</platform>
                         <platform>windows</platform>
                     </platforms>
                 </configuration>
-            </plugin>
+            </plugin>    
         </plugins>
     </build>
 

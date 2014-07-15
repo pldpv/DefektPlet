@@ -24,6 +24,7 @@ public class DrawDefekt implements Drawable {
     private final GraphicsCharacteristics gc;
     private DrawableInfo info;
 
+    @Override
     public DrawableInfo getInfo() {
         return info;
     }
@@ -44,7 +45,7 @@ public class DrawDefekt implements Drawable {
     }
 
     private int getX() {
-        return gc.LEGEND_WIDTH + ((rd.getKm() - ii.getKmS()) * 1000 + rd.getM() - ii.getmS())
+        return ((rd.getKm() - ii.getKmS()) * 1000 + rd.getM() - ii.getmS())
                 * gc.IMG_WIDTH / gc.SCALE;
     }
 

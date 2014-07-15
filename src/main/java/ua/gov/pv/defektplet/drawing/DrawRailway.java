@@ -47,7 +47,7 @@ public class DrawRailway {
         maxIndex = (getDirectionEnd(direction) - (ii.getKmS() * 1000 - ii.getmS()) + 1)
                 / this.scale;
         currentIndex = 0;
-        gc = new GraphicsCharacteristics(imageWidth / numberOfItems, 0,
+        gc = new GraphicsCharacteristics(imageWidth / numberOfItems, 
                 20, this.scale);
         cacheRailway = new CacheRailway(CACHE_SIZE, minIndex, maxIndex);
     }
@@ -175,7 +175,7 @@ public class DrawRailway {
         int kmE = (kmS * 1000 + mS + scale * numberOfItems) / 1000;
         int mE = (mS + scale * numberOfItems) % 1000;
         IntervalInformation iInf = new IntervalInformation(ii.getDirection(), kmS, mS, kmE, mE, ii.getLine(), null);
-        GraphicsCharacteristics gcR = new GraphicsCharacteristics(imageWidth, 0, gc.HEIGHT, gc.SCALE * numberOfItems);
+        GraphicsCharacteristics gcR = new GraphicsCharacteristics(imageWidth, gc.HEIGHT, gc.SCALE * numberOfItems);
         DrawRank dr = new DrawRank(iInf, gcR);
         BufferedImage bImageRank = new BufferedImage(imageWidth, gc.HEIGHT, BufferedImage.TYPE_INT_RGB);
         dr.draw(bImageRank.createGraphics());

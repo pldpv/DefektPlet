@@ -33,14 +33,14 @@ public class DrawRank implements Drawable {
         Graphics2D g2 = (Graphics2D) g;
         g2.setFont(gc.font);
         g2.setColor(Color.GRAY);
-        g2.fillRect(0, 0, gc.IMG_WIDTH + gc.LEGEND_WIDTH, gc.HEIGHT);
+        g2.fillRect(0, 0, gc.IMG_WIDTH , gc.HEIGHT);
         g2.setColor(Color.BLACK);
-        g2.drawLine(gc.LEGEND_WIDTH, gc.HEIGHT - 1, gc.LEGEND_WIDTH + gc.IMG_WIDTH,
+        g2.drawLine(0, gc.HEIGHT - 1, gc.IMG_WIDTH,
                 gc.HEIGHT - 1);
         FontMetrics fm = g2.getFontMetrics(gc.font);
         int startC = (ii.getmS() % 100 != 0) ? 100 - ii.getmS() % 100 : 0;
         for (int i = 0; i <= gc.SCALE; i += 100) {
-            int x = gc.LEGEND_WIDTH + (startC + i) * gc.IMG_WIDTH / gc.SCALE;
+            int x = (startC + i) * gc.IMG_WIDTH / gc.SCALE;
             g2.drawLine(x, gc.HEIGHT, x, gc.HEIGHT - 2);
             if (i == gc.SCALE) {
                 g2.drawString(getPk(ii.getmS() + i),

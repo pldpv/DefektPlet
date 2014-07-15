@@ -5,11 +5,11 @@
  */
 package ua.gov.pv.defektplet.drawing;
 
-import ua.gov.pv.defektplet.util.DrawableList;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import ua.gov.pv.defektplet.util.DrawableList;
 
 /**
  *

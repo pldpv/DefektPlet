@@ -18,7 +18,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Direction implements Serializable {
-   @Id
+    @Id
     @GeneratedValue
     private Integer id;
     @Column

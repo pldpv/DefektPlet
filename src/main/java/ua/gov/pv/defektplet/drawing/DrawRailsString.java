@@ -44,21 +44,19 @@ public class DrawRailsString implements Drawable {
 
     private int getStartX() {
         if (rs.getKmS() * 1000 + rs.getmS() > ii.getKmS() * 1000 + ii.getmS()) {
-            return (int) (gc.LEGEND_WIDTH
-                    + ((rs.getKmS() - ii.getKmS()) * 1000 + rs.getmS() - ii.getmS())
+            return (int) (((rs.getKmS() - ii.getKmS()) * 1000 + rs.getmS() - ii.getmS())
                     * gc.IMG_WIDTH / gc.SCALE);
         } else {
-            return gc.LEGEND_WIDTH;
+            return 0;
         }
     }
 
     private int getEndX() {
         if (rs.getKmE() * 1000 + rs.getmE() < ii.getKmE() * 1000 + ii.getmE()) {
-            return (int) (gc.LEGEND_WIDTH
-                    + ((rs.getKmE() - ii.getKmS()) * 1000 + rs.getmE() - ii.getmS())
+            return (int) (((rs.getKmE() - ii.getKmS()) * 1000 + rs.getmE() - ii.getmS())
                     * gc.IMG_WIDTH / gc.SCALE);
         } else {
-            return gc.IMG_WIDTH + gc.LEGEND_WIDTH;
+            return gc.IMG_WIDTH;
         }
     }
 

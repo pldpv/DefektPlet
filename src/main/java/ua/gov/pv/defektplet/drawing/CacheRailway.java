@@ -1,5 +1,6 @@
 /*
- * Caches railway objects
+ * Caches railway objects where Key is index of RailwayItem, 
+ * value - GraphicsContent
  */
 package ua.gov.pv.defektplet.drawing;
 
@@ -10,7 +11,8 @@ import ua.gov.pv.defektplet.util.GraphicsContent;
 
 /**
  * 
- * @author Евген
+ * @author Tkachuk Evgen 
+ * @see GraphicsContent
  */
 public class CacheRailway extends HashMap<Integer, GraphicsContent> {
     /**

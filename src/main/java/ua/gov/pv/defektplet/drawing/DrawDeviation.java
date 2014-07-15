@@ -23,11 +23,11 @@ public class DrawDeviation implements Drawable {
     private final int penWidth;
     private final GraphicsCharacteristics gc;
 
-    public DrawDeviation(Deviation dev, GraphicsCharacteristics gh, IntervalInformation ii) {
+    public DrawDeviation(Deviation dev, GraphicsCharacteristics gc, IntervalInformation ii) {
         this.ii = ii;
         this.deviation = dev;
-        this.gc=gh;
-        penWidth =  gh.IMG_WIDTH/gh.SCALE;
+        this.gc=gc;
+        penWidth =  gc.IMG_WIDTH/gc.SCALE;
 
     }
 

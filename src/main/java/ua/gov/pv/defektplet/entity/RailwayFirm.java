@@ -4,43 +4,27 @@
  */
 package ua.gov.pv.defektplet.entity;
 
-
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.annotations.Formula;
+import ua.gov.pv.defektplet.util.HibernateUtil;
+
 /**
  *
  * @author 1
  */
-@Entity(name="firm")
-public class RailwayFirm implements Serializable{
-    @Id
-    @GeneratedValue
-    private Integer id;
+@Entity(name = "firm")
+public class RailwayFirm implements Serializable {
+
+    @EmbeddedId
+    private FirmId firmId;
+
     @Column
-    private String nameFirm;
     private String fullName;
     private String director;
-    @ManyToOne
-    @JoinColumn(name ="idRailway", referencedColumnName="idRailway")
-    private Railway railway;
-    @Formula("idRailway+nameFirm")
-    private String idFirm;
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNameFirm() {
-        return nameFirm;
-    }
-
-    public void setNameFirm(String nameFirm) {
-        this.nameFirm = nameFirm;
-    }
+    
 
     public String getFullName() {
         return fullName;
@@ -58,25 +42,39 @@ public class RailwayFirm implements Serializable{
         this.director = director;
     }
 
-    public Railway getRailway() {
-        return railway;
-    }
-
-    public void setRailway(Railway railway) {
-        this.railway = railway;
+    /**
+     * @return the firmId
+     */
+    public FirmId getFirmId() {
+        return firmId;
     }
 
     /**
-     * @return the idFirm
+     * @param firmId the firmId to set
      */
-    public String getIdFirm() {
-        return idFirm;
+    public void setFirmId(FirmId firmId) {
+        this.firmId = firmId;
     }
+    public static void main(String ... args){
+        RailwayFirm r= new RailwayFirm();
+        r.setDirector("Tertychniy");
+        r.setFullName("Kharkiv");
+        FirmId f=new FirmId();
+        f.setNameFirm("PCH-3");
+        Railway rail = new Railway();
+        rail.setId(1);
+        rail.setIdRailway(4);
+        rail.setRailwayName("South");
+        f.setRailway(rail);
+        r.setFirmId(f);
+        Session sess=HibernateUtil.getSessionFactory().openSession();
+        Transaction tx=sess.beginTransaction();
+        sess.save(r);
+        tx.commit();
+        sess.close();
+        
+    }
+}
 
-    /**
-     * @param idFirm the idFirm to set
-     */
-    public void setIdFirm(String idFirm) {
-        this.idFirm = idFirm;
-    }
+class Test{
 }
