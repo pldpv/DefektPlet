@@ -1,23 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/defektstrings</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">pld1</property>
-    <property name="hibernate.show_sql">true</property>
-    <mapping class="ua.gov.pv.defektplet.entity.Deviation"/>
-    <mapping class="ua.gov.pv.defektplet.entity.Direction"/>
-    <mapping class="ua.gov.pv.defektplet.entity.FirmDirection"/>
-    <mapping class="ua.gov.pv.defektplet.entity.GovernedVelocity"/>
-    <mapping class="ua.gov.pv.defektplet.entity.RailsDefect"/>
-    <mapping class="ua.gov.pv.defektplet.entity.RailsStrings"/>
-    <mapping class="ua.gov.pv.defektplet.entity.Railway"/>
-    <mapping class="ua.gov.pv.defektplet.entity.RailwayDirection"/>
-    <mapping class="ua.gov.pv.defektplet.entity.RailwayFirm"/>
-    <mapping class="ua.gov.pv.defektplet.entity.TemporaryRecovery"/>
+  <?xml version="1.0" encoding="UTF-8" ?> 
+  <!DOCTYPE hibernate-configuration (View Source for full doctype...)> 
+- <hibernate-configuration>
+- <session-factory>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> 
+  <property name="hibernate.hbm2ddl.auto">update</property> 
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> 
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/defektstrings</property> 
+  <property name="hibernate.connection.username">root</property> 
+  <property name="hibernate.connection.password">pld1</property> 
+  <property name="hibernate.show_sql">true</property> 
+  <mapping class="ua.gov.pv.defektplet.entity.Deviation" /> 
+  <mapping class="ua.gov.pv.defektplet.entity.Direction" /> 
+  <mapping class="ua.gov.pv.defektplet.entity.GovernedVelocity" /> 
+  <mapping class="ua.gov.pv.defektplet.entity.RailsDefect" /> 
+  <mapping class="ua.gov.pv.defektplet.entity.RailsStrings" /> 
+  <mapping class="ua.gov.pv.defektplet.entity.TemporaryRecovery" /> 
   </session-factory>
-</hibernate-configuration>
+  </hibernate-configuration>

@@ -20,6 +20,7 @@ public class ChooseIntervalPanel extends JPanel {
     private final JLabel[] label = new JLabel[6];
     private final JTextField[] textFiels = new JTextField[5];
     private JComboBox<Integer> cbScale;
+    private JComboBox [] chooseCombo=new JComboBox[4];
     final JCheckBox[] drawCheckBox = new JCheckBox[7];
     JButton bDraw;
 
@@ -45,19 +46,30 @@ public class ChooseIntervalPanel extends JPanel {
             add(l, c);
             c.gridx++;
         }
+        chooseCombo[0]=new JComboBox<String>();
+        chooseCombo[0].addItem("Оберіть залізницю");
+        chooseCombo[0].addItem("Південна");
+        chooseCombo[1]=new JComboBox<String>();
+        chooseCombo[1].addItem("Оберіть дистанцію колії");
+        chooseCombo[1].addItem("ПЧ-10");
+        chooseCombo[2]=new JComboBox<String>();
+        chooseCombo[2].addItem("Оберіть напрямок");
+        chooseCombo[2].addItem("Дарниця - Полтава");
+        chooseCombo[3]=new JComboBox<Integer>();
+        chooseCombo[3].addItem("Оберіть колію");
+        chooseCombo[3].addItem(1);
+        chooseCombo[3].addItem(2);
         textFiels[0] = new JTextField();
-        textFiels[1] = new JTextField();
-        textFiels[2] = new JTextField();
-        textFiels[3] = new JTextField();
-        textFiels[4] = new JTextField();
         c.gridx = 0;
-        for (JTextField t : textFiels) {
+        for (JComboBox combo : chooseCombo) {
             c.gridy = 1;
             c.weightx = 1;
             c.fill = GridBagConstraints.HORIZONTAL;
-            add(t, c);
+            add(combo, c);
             c.gridx++;
         }
+        
+        add(textFiels[0],c);
         cbScale = new JComboBox<Integer>();
         cbScale.addItem(1);
         cbScale.addItem(2);
@@ -97,15 +109,15 @@ public class ChooseIntervalPanel extends JPanel {
     }
 
     public String getDirection() {
-        return textFiels[2].getText();
+        return (String)chooseCombo[2].getSelectedItem();
     }
 
     public int getLine() {
-        return Integer.parseInt(textFiels[3].getText());
+        return (int)chooseCombo[3].getSelectedItem();
     }
 
     public int getKm() {
-        return Integer.parseInt(textFiels[4].getText());
+        return Integer.parseInt(textFiels[0].getText());
     }
 
     public int getScale() {

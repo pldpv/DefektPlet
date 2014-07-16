@@ -50,6 +50,7 @@ public class GraphicAnaliz extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 drawRailway = new DrawRailway(new IntervalInformation(
                         choosePanel.getDirection(), choosePanel.getKm(), 0,
                         choosePanel.getKm() + choosePanel.getScale() * 1000 / 1000,
