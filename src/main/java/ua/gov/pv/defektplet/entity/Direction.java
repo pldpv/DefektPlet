@@ -22,8 +22,7 @@ public class Direction implements Serializable {
     @GeneratedValue
     private Integer id;
     @Column
-    private Integer idDirection;
-    private String nameDirection;
+    private String direction;
     private Integer line;
     private Integer kmS;
     private Integer mS;
@@ -78,31 +77,19 @@ public class Direction implements Serializable {
         this.mE = mE;
     }
 
+  
+
     /**
-     * @return the idDirection
+     * @return the direction
      */
-    public Integer getIdDirection() {
-        return idDirection;
+    public String getDirection() {
+        return direction;
     }
 
     /**
-     * @param idDirection the idDirection to set
+     * @param direction the direction to set
      */
-    public void setIdDirection(Integer idDirection) {
-        this.idDirection = idDirection;
-    }
-
-    /**
-     * @return the nameDirection
-     */
-    public String getNameDirection() {
-        return nameDirection;
-    }
-
-    /**
-     * @param nameDirection the nameDirection to set
-     */
-    public void setNameDirection(String nameDirection) {
-        this.nameDirection = nameDirection;
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }

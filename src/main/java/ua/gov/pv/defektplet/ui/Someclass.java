@@ -21,9 +21,10 @@ public class Someclass {
 
     private JMenuBar jMenuBar;
     private TabPaneClosable tabPane;
-    static ResourceBundle labels = ResourceBundle.getBundle("DefectStrings",new Locale("ua"));
-    static Dimension screenSize = 
-                    Toolkit.getDefaultToolkit().getScreenSize();
+    static ResourceBundle labels = ResourceBundle.getBundle("DefectStrings", new Locale("ua"));
+    static Dimension screenSize =
+            Toolkit.getDefaultToolkit().getScreenSize();
+
     public Someclass() {
         initComponents();
         BasicConfigurator.configure();
@@ -32,6 +33,7 @@ public class Someclass {
     private void initComponents() {
         final JFrame f = new JFrame();
         f.setSize(screenSize.width, screenSize.height);
+        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
         f.setJMenuBar(new DefectMenuBar(f));
         f.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         tabPane = new TabPaneClosable();
@@ -41,10 +43,14 @@ public class Someclass {
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -64,12 +70,14 @@ public class Someclass {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new Someclass();
             }
         });
     }
-
 }

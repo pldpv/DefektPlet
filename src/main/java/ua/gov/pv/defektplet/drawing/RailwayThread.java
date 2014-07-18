@@ -7,6 +7,7 @@ package ua.gov.pv.defektplet.drawing;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JCheckBox;
 import ua.gov.pv.defektplet.helper.DefectStringsDataSource;
@@ -35,20 +36,24 @@ public class RailwayThread {
         FillDrawableList fillDrawable = new FillDrawableList(ii, gc);
         DefectStringsDataSource helper = new DefectStringsDataSource(ii);
         if (ii.getRailThread().equals("Права")) {
+
             DrawableList govVelocity = new DrawableList(createBImage(1));
             fillDrawable.fillList(govVelocity, helper.getGovernedVelocity());
             railThread.add(govVelocity);
             if (cb[2].isSelected()) {
+
                 DrawableList realigning = new DrawableList(createBImage(1));
                 fillDrawable.fillList(realigning, helper.getDeviations("Р"));
                 railThread.add(realigning);
             }
             if (cb[3].isSelected()) {
+
                 DrawableList obliqueSetting = new DrawableList(createBImage(1));
                 fillDrawable.fillList(obliqueSetting, helper.getDeviations("П"));
                 railThread.add(obliqueSetting);
             }
             if (cb[4].isSelected()) {
+
                 DrawableList leftSag = new DrawableList(createBImage(1));
                 fillDrawable.fillList(leftSag, helper.getDeviations("Пр.л"));
                 railThread.add(leftSag);
@@ -57,19 +62,24 @@ public class RailwayThread {
                 railThread.add(rightSag);
             }
             if (cb[5].isSelected()) {
+
                 DrawableList widening = new DrawableList(createBImage(1));
                 fillDrawable.fillList(widening, helper.getDeviations("У"));
                 railThread.add(widening);
             }
             if (cb[6].isSelected()) {
+
                 DrawableList narrowPart = new DrawableList(createBImage(1));
                 fillDrawable.fillList(narrowPart, helper.getDeviations("Суж"));
                 railThread.add(narrowPart);
             }
+
         }
+
         DrawableList railStrings = new DrawableList(createBImage(1));
         fillDrawable.fillList(railStrings, helper.getRailsStrings());
         if (cb[0].isSelected()) {
+
             DrawableList railDefect = new DrawableList(createBImage(1));
             fillDrawable.fillList(railDefect, helper.getRailsDefectList());
             railThread.add(railDefect);
@@ -90,5 +100,4 @@ public class RailwayThread {
         createDrawableList();
         return railThread;
     }
-
 }

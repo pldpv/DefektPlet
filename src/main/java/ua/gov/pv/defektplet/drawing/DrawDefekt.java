@@ -8,6 +8,7 @@ package ua.gov.pv.defektplet.drawing;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import ua.gov.pv.defektplet.entity.RailsDefect;
 import ua.gov.pv.defektplet.helper.DrawableInfo;
 import ua.gov.pv.defektplet.helper.IntervalInformation;
@@ -39,8 +40,12 @@ public class DrawDefekt implements Drawable {
     @Override
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(Color.BLACK);
-        g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
+        //g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
+        g2.drawOval(getX(), gc.HEIGHT/2 -3, 6, 6);
     }
 
     private int getX() {

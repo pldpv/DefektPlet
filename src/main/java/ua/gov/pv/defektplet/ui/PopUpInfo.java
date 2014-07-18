@@ -18,10 +18,10 @@ import javax.swing.event.MouseInputAdapter;
  * @author Евген
  */
 
-public  class PopUpInfo1 extends JPanel {
+public class PopUpInfo extends JPanel {
 
 
-    public PopUpInfo1(final String info, int x_pos, int y_pos) {
+    public PopUpInfo(final String info, int x_pos, int y_pos) {
 
         final JTextArea textArea = new JTextArea(info);
         add(textArea);
@@ -40,7 +40,7 @@ public  class PopUpInfo1 extends JPanel {
                 bound.width = textArea.getPreferredSize().width;
                 bound.height = textArea.getPreferredSize().height;
                 setBounds(bound);
-                textArea.setOpaque(true);
+                textArea.setOpaque(false);
                 textArea.setVisible(true);
             }
 

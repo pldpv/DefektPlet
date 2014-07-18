@@ -26,12 +26,13 @@ public class ImagePanel extends JPanel {
         result = new BufferedImage(imgWidth, (int) imgHeight, BufferedImage.TYPE_INT_RGB);
         setPreferredSize(new Dimension(result.getWidth(), result.getHeight()));
     }
-
+    public BufferedImage getImage(){
+        return result;
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D)g;
-        g2.setComposite(AlphaComposite.Src);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -60,7 +61,7 @@ public class ImagePanel extends JPanel {
             x_pos = y_pos = offset;
             x_pos *= info.getX();
             y_pos *= info.getY();
-            PopUpInfo1 panel = new PopUpInfo1(info.getInfo().toString(), (int) x_pos, (int) y_pos);
+            PopUpInfo panel = new PopUpInfo(info.getInfo().toString(), (int) x_pos, (int) y_pos);
             //PopUpInfo pop=new PopUpInfo(info.getInfo().toString());
             //pop.setLocation((int)x_pos, (int) y_pos);
             //pop.setVisible(true);
@@ -72,33 +73,4 @@ public class ImagePanel extends JPanel {
         content = graphicsContent;
     }
 
-    private static class PopUpInfo extends JPanel {
-
-        public PopUpInfo(final String info) {
-
-            final JTextArea textArea = new JTextArea(info);
-            add(textArea);
-            setBackground(Color.WHITE);
-            textArea.setVisible(false);
-            setBorder(BorderFactory.createTitledBorder("Info"));
-            setOpaque(false);
-
-            MouseInputAdapter mouseHandler = new MouseInputAdapter() {
-
-                @Override
-                public void mouseEntered(final MouseEvent e) {
-                    System.out.println(e);
-                    textArea.setVisible(true);
-
-                }
-
-                @Override
-                public void mouseExited(final MouseEvent e) {
-                    System.out.println(e);
-                    textArea.setVisible(false);
-                }
-            };
-            addMouseListener(mouseHandler);
-        }
-    }
 }

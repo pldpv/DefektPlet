@@ -8,6 +8,8 @@ package ua.gov.pv.defektplet.ui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.*;
 import static ua.gov.pv.defektplet.ui.Someclass.labels;
 
@@ -17,10 +19,10 @@ import static ua.gov.pv.defektplet.ui.Someclass.labels;
  */
 public class ChooseIntervalPanel extends JPanel {
 
-    private final JLabel[] label = new JLabel[6];
+    private final JLabel[] label = new JLabel[7];
     private final JTextField[] textFiels = new JTextField[5];
     private JComboBox<Integer> cbScale;
-    private JComboBox [] chooseCombo=new JComboBox[4];
+    private JComboBox[] chooseCombo = new JComboBox[5];
     final JCheckBox[] drawCheckBox = new JCheckBox[7];
     JButton bDraw;
 
@@ -34,9 +36,10 @@ public class ChooseIntervalPanel extends JPanel {
         label[0] = new JLabel(labels.getString("jlRailway"));
         label[1] = new JLabel(labels.getString("jlFirm"));
         label[2] = new JLabel(labels.getString("jlDirection"));
-        label[3] = new JLabel(labels.getString("jlLine"));
-        label[4] = new JLabel(labels.getString("jlKm"));
-        label[5] = new JLabel(labels.getString("jlScale"));
+        label[3] = new JLabel(labels.getString("jlRunningLine"));
+        label[4] = new JLabel(labels.getString("jlLine"));
+        label[5] = new JLabel(labels.getString("jlKm"));
+        label[6] = new JLabel(labels.getString("jlScale"));
         c.gridx = 0;
         for (JLabel l : label) {
             c.gridy = 0;
@@ -46,19 +49,22 @@ public class ChooseIntervalPanel extends JPanel {
             add(l, c);
             c.gridx++;
         }
-        chooseCombo[0]=new JComboBox<String>();
+        chooseCombo[0] = new JComboBox<String>();
         chooseCombo[0].addItem("Оберіть залізницю");
         chooseCombo[0].addItem("Південна");
-        chooseCombo[1]=new JComboBox<String>();
+        chooseCombo[1] = new JComboBox<String>();
         chooseCombo[1].addItem("Оберіть дистанцію колії");
         chooseCombo[1].addItem("ПЧ-10");
-        chooseCombo[2]=new JComboBox<String>();
+        chooseCombo[2] = new JComboBox<String>();
         chooseCombo[2].addItem("Оберіть напрямок");
         chooseCombo[2].addItem("Дарниця - Полтава");
-        chooseCombo[3]=new JComboBox<Integer>();
-        chooseCombo[3].addItem("Оберіть колію");
-        chooseCombo[3].addItem(1);
-        chooseCombo[3].addItem(2);
+        chooseCombo[3] = new JComboBox<String>();
+        chooseCombo[3].addItem("Оберіть перегін");
+        chooseCombo[3].addItem("Божково - Свинковка");
+        chooseCombo[4] = new JComboBox<Integer>();
+        chooseCombo[4].addItem("Оберіть колію");
+        chooseCombo[4].addItem(1);
+        chooseCombo[4].addItem(2);
         textFiels[0] = new JTextField();
         c.gridx = 0;
         for (JComboBox combo : chooseCombo) {
@@ -68,8 +74,8 @@ public class ChooseIntervalPanel extends JPanel {
             add(combo, c);
             c.gridx++;
         }
-        
-        add(textFiels[0],c);
+
+        add(textFiels[0], c);
         cbScale = new JComboBox<Integer>();
         cbScale.addItem(1);
         cbScale.addItem(2);
@@ -108,12 +114,47 @@ public class ChooseIntervalPanel extends JPanel {
 
     }
 
+    public List<String> createLegend() {
+        List<String> legend = new LinkedList<String>();
+        legend.add("км/ПК");
+        legend.add("Встановлена");
+        if (drawCheckBox[2].isSelected()) {
+            legend.add("Рихтування");
+        }
+        if (drawCheckBox[3].isSelected()) {
+            legend.add("Перекос");
+        }
+        if (drawCheckBox[4].isSelected()) {
+            legend.add("Просадка ліва");
+            legend.add("Просадка права");
+        }
+        if (drawCheckBox[5].isSelected()) {
+            legend.add("Уширення");
+        }
+        if (drawCheckBox[6].isSelected()) {
+            legend.add("Звуження");
+        }
+        if (drawCheckBox[1].isSelected()) {
+            legend.add("Права/ТВ");
+            legend.add("Ліва/ТВ");
+        } else {
+            legend.add("Права");
+            legend.add("Ліва");
+        }
+        if (drawCheckBox[0].isSelected()) {
+            legend.add(legend.size() - 2, "Дефекти");
+            legend.add(legend.size() - 1, "Дефекти");
+        }
+
+        return legend;
+    }
+
     public String getDirection() {
-        return (String)chooseCombo[2].getSelectedItem();
+        return (String) chooseCombo[2].getSelectedItem();
     }
 
     public int getLine() {
-        return (int)chooseCombo[3].getSelectedItem();
+        return (int) chooseCombo[4].getSelectedItem();
     }
 
     public int getKm() {

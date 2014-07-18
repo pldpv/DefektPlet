@@ -37,7 +37,7 @@ public class DrawRailsString implements Drawable {
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
-        BasicStroke pen = new BasicStroke(2);
+        BasicStroke pen = new BasicStroke(1);
         g2.setStroke(pen);
         g2.drawLine(getStartX(), linePos, getEndX(), linePos);
     }
