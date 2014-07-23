@@ -54,13 +54,13 @@ public class ChooseIntervalPanel extends JPanel {
         chooseCombo[0].addItem("Південна");
         chooseCombo[1] = new JComboBox<String>();
         chooseCombo[1].addItem("Оберіть дистанцію колії");
-        chooseCombo[1].addItem("ПЧ-10");
+        chooseCombo[1].addItem("ПЧ-18");
         chooseCombo[2] = new JComboBox<String>();
         chooseCombo[2].addItem("Оберіть напрямок");
         chooseCombo[2].addItem("Дарниця - Полтава");
         chooseCombo[3] = new JComboBox<String>();
         chooseCombo[3].addItem("Оберіть перегін");
-        chooseCombo[3].addItem("Божково - Свинковка");
+        chooseCombo[3].addItem("Гребінка - Боярський");
         chooseCombo[4] = new JComboBox<Integer>();
         chooseCombo[4].addItem("Оберіть колію");
         chooseCombo[4].addItem(1);
@@ -134,16 +134,24 @@ public class ChooseIntervalPanel extends JPanel {
         if (drawCheckBox[6].isSelected()) {
             legend.add("Звуження");
         }
+
         if (drawCheckBox[1].isSelected()) {
+
             legend.add("Права/ТВ");
+            legend.add("Бок. знос");
+            legend.add("Бок. знос");
             legend.add("Ліва/ТВ");
+
         } else {
             legend.add("Права");
+            legend.add("Бок. знос");
+            legend.add("Бок. знос");
             legend.add("Ліва");
+
         }
         if (drawCheckBox[0].isSelected()) {
+            legend.add(legend.size() - 4, "Дефекти");
             legend.add(legend.size() - 2, "Дефекти");
-            legend.add(legend.size() - 1, "Дефекти");
         }
 
         return legend;

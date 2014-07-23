@@ -40,7 +40,6 @@ public class TabPaneClosable extends JTabbedPane {
         JPanel pnlTab = new JPanel(new GridBagLayout());
         pnlTab.setOpaque(false);
         JLabel lblTitle = new JLabel(title);
-
         JButton btnClose = new JButton("x");
         btnClose.setBorder(BorderFactory.createEmptyBorder(1, 4, 2, 3));
         btnClose.setHorizontalAlignment(SwingConstants.CENTER);
@@ -72,10 +71,12 @@ public class TabPaneClosable extends JTabbedPane {
 
         @Override
         public void actionPerformed(ActionEvent evt) {
-
+            
             int index = indexOfTab(getTabName());
             if (index >= 0) {
+                
                 removeTabAt(index);
+                setTabComponentAt(index, null);
             }
         }
     }

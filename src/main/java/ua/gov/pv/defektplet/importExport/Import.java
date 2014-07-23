@@ -34,7 +34,7 @@ public class Import {
             try {
                 session = dao.getSession();
                 tx = session.beginTransaction();
-                dao.deleteAll(importList.get(0).getClass());
+            //    dao.deleteAll(importList.get(0).getClass());
                 dao.saveList(importList);
                 tx.commit();
             } catch (HibernateException ex) {
@@ -65,6 +65,9 @@ public class Import {
                 break;
             case "напрямки":
                 list = new DirectionList(rowList);
+                break;
+            case "боковой износ":
+                list=new SideWearList(rowList);
                 break;
         }
         return list;

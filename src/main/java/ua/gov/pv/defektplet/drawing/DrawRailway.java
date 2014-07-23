@@ -73,6 +73,7 @@ public class DrawRailway {
 
             @Override
             public Object next() {
+                
                 if (hasNext()) {
                     ++currentIndex;
                     int cacheIndex = cacheRailway.maxKey() + 1;
@@ -84,6 +85,7 @@ public class DrawRailway {
                                 new GraphicsContent(drawItem.getImage(), drawItem.getRItemInfoList()));
                     }
                 }
+
                 return null;
             }
 
@@ -136,6 +138,7 @@ public class DrawRailway {
     }
 
     public void draw() {
+        
         int imgHeight = cacheRailway.get(currentIndex).getbImage().getHeight() + gc.HEIGHT;
         bImage = new BufferedImage(imageWidth, imgHeight,
                 BufferedImage.TYPE_INT_RGB);

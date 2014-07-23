@@ -105,4 +105,19 @@ public class DefectStringsDataSource {
         session.close();
         return dir;
     }
+
+    public List<SideWear> getSideWear() {
+        List<SideWear> list;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Criterion cr1 = Restrictions.le("startCoordinate", ii.getKmE() * 1000 + ii.getmE());
+        Criterion cr2 = Restrictions.ge("endCoordinate", ii.getKmS() * 1000 + ii.getmS());
+        list = session.createCriteria(SideWear.class)
+                .add(Restrictions.eq("direction", ii.getDirection()))
+                .add(Restrictions.eq("line", ii.getLine()))
+                .add(Restrictions.eq("railThread", ii.getRailThread()))
+                .add(Restrictions.and(cr1, cr2))
+                .list();
+        session.close();
+        return list;
+    }
 }

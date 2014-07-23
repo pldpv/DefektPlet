@@ -34,7 +34,8 @@ public class RailwayItem {
         ii.setRailThread("Ліва");
         railwayItem.addAll(new RailwayThread(cb, ii, gc).getRailThread());
     }
-    public List<DrawableList> getRailwayItem(){
+
+    public List<DrawableList> getRailwayItem() {
         createRailwayItem();
         return railwayItem;
     }

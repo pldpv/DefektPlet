@@ -59,6 +59,7 @@ public class DefectStrings extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(16, 8, 0));
 
         jButton1.setText("SomeStuff");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -22,22 +22,21 @@ public class DrawDeviation implements Drawable {
     private final Deviation deviation;
     private final int penWidth;
     private final GraphicsCharacteristics gc;
+    private DrawableInfo info;
 
     public DrawDeviation(Deviation dev, GraphicsCharacteristics gh, IntervalInformation ii) {
         this.ii = ii;
         this.deviation = dev;
-        this.gc=gh;
-        penWidth =  gh.IMG_WIDTH/gh.SCALE;
-
+        this.gc = gh;
+        penWidth = deviation.getDeviationLength() * gh.IMG_WIDTH / gh.SCALE;
+        info = new DrawableInfo(getX(), gc.HEIGHT, penWidth, gc.HEIGHT, info());
     }
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2=(Graphics2D) g;
-        g2.setColor(Color.WHITE);
-        g2.fillRect(0, 0, 1000, gc.HEIGHT);
+        Graphics2D g2 = (Graphics2D) g;
         g2.setColor(getColor());
-        g2.fillRect(getX(), 0, penWidth, gc.HEIGHT);
+        g2.fillRect(getX(), 2, penWidth, gc.HEIGHT - 3);
     }
 
     private Color getColor() {
@@ -58,7 +57,17 @@ public class DrawDeviation implements Drawable {
 
     @Override
     public DrawableInfo getInfo() {
-        return null;
+        return info;
     }
 
+    private String info() {
+        String eol = System.getProperty("line.separator");
+        String result = new String(
+                "Відступ: " + deviation.getDeviation() + eol
+                + "Ступінь: " + deviation.getLevel() + eol
+                + "Довжина: " + deviation.getDeviationLength() + eol
+                + "Балл: " + deviation.getRate() + eol
+                + "Дата: " + deviation.getDateMeasuring());
+        return result;
+    }
 }

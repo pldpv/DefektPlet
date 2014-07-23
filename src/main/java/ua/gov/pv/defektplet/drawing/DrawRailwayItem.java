@@ -5,8 +5,11 @@
  */
 package ua.gov.pv.defektplet.drawing;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import ua.gov.pv.defektplet.util.DrawableList;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +32,18 @@ public class DrawRailwayItem {
         bImage = new BufferedImage(getImageWidth(), getImageHeight(),
                 BufferedImage.TYPE_INT_RGB);
         Graphics g = bImage.getGraphics();
+        Graphics2D g2=(Graphics2D)g;
         int height = 0;
         for (DrawableList dl : drawableList) {
             dl.draw();
             g.drawImage(dl.getbImage(), 0, height, null);
             height += dl.getbImage().getHeight();
+            g.setColor(Color.GRAY);
+            float[] dash = {5, 3, 1, 3};
+            BasicStroke pen = new BasicStroke(1, BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_BEVEL, 10, dash, 0);
+            g2.setStroke(pen);
+            g2.drawLine(0, height-1, dl.getbImage().getWidth(), height-1);
         }
 
         g.dispose();

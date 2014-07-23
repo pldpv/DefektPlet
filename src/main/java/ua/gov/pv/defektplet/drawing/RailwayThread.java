@@ -78,6 +78,9 @@ public class RailwayThread {
 
         DrawableList railStrings = new DrawableList(createBImage(1));
         fillDrawable.fillList(railStrings, helper.getRailsStrings());
+        DrawableList insideWear = new DrawableList(createBImage(1));
+        fillDrawable.fillList(insideWear, helper.getSideWear());
+
         if (cb[0].isSelected()) {
 
             DrawableList railDefect = new DrawableList(createBImage(1));
@@ -87,7 +90,13 @@ public class RailwayThread {
         if (cb[1].isSelected()) {
             fillDrawable.fillList(railStrings, helper.getTemporaryRecovery());
         }
-        railThread.add(railStrings);
+        if (ii.getRailThread().equals("Права")) {
+            railThread.add(railStrings);
+            railThread.add(insideWear);
+        }else{
+            railThread.add(insideWear);
+            railThread.add(railStrings);
+        }
 
     }
 

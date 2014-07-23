@@ -31,6 +31,9 @@ public class DrawableFactory {
         if (obj instanceof TemporaryRecovery) {
             return new DrawTemporaryRecovery( (TemporaryRecovery) obj, gc, ii);
         }
+        if (obj instanceof SideWear) {
+            return new DrawInsideWear( (SideWear) obj, gc, ii);
+        }
         return null;
 
     }

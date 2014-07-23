@@ -61,7 +61,7 @@ public class ImagePanel extends JPanel {
             x_pos = y_pos = offset;
             x_pos *= info.getX();
             y_pos *= info.getY();
-            PopUpInfo panel = new PopUpInfo(info.getInfo().toString(), (int) x_pos, (int) y_pos);
+            PopUpInfo panel = new PopUpInfo(info.getInfo().toString(), (int) x_pos, (int) y_pos,info.getWidth());
             //PopUpInfo pop=new PopUpInfo(info.getInfo().toString());
             //pop.setLocation((int)x_pos, (int) y_pos);
             //pop.setVisible(true);

@@ -21,13 +21,13 @@ import javax.swing.event.MouseInputAdapter;
 public class PopUpInfo extends JPanel {
 
 
-    public PopUpInfo(final String info, int x_pos, int y_pos) {
+    public PopUpInfo(final String info, int x_pos, int y_pos,int width) {
 
         final JTextArea textArea = new JTextArea(info);
         add(textArea);
         setBackground(Color.WHITE);
         textArea.setVisible(false);
-        setBounds(x_pos, y_pos, 20, 20);
+        setBounds(x_pos, y_pos, width, 20);
         setOpaque(false);
         setVisible(true);
         final Rectangle bounds = getBounds();
